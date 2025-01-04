@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\repos\\lightningbug\\LEDGrid\\LEDGrid.csproj": {}
+    "C:\\repos\\lightningbug\\DesignerApps\\LEDGrid\\LEDGrid.csproj": {}
   },
   "projects": {
-    "C:\\repos\\lightningbug\\LEDGrid\\LEDGrid.csproj": {
+    "C:\\repos\\lightningbug\\DesignerApps\\LEDGrid\\LEDGrid.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\repos\\lightningbug\\LEDGrid\\LEDGrid.csproj",
+        "projectUniqueName": "C:\\repos\\lightningbug\\DesignerApps\\LEDGrid\\LEDGrid.csproj",
         "projectName": "LEDGrid",
-        "projectPath": "C:\\repos\\lightningbug\\LEDGrid\\LEDGrid.csproj",
+        "projectPath": "C:\\repos\\lightningbug\\DesignerApps\\LEDGrid\\LEDGrid.csproj",
         "packagesPath": "C:\\Users\\jbema\\.nuget\\packages\\",
-        "outputPath": "C:\\repos\\lightningbug\\LEDGrid\\obj\\",
+        "outputPath": "C:\\repos\\lightningbug\\DesignerApps\\LEDGrid\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jbema\\AppData\\Roaming\\NuGet\\NuGet.Config"
