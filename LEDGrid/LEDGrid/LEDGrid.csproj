@@ -1,0 +1,28 @@
+<!-- filepath: /c:/repos/LEDGrid/LEDGrid/LEDGrid.csproj -->
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Delete Files="$(OutputPath)rectangle_positions.json" />
+  </Target>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Copy SourceFiles="rectangle_positions.json" DestinationFolder="$(OutputPath)" />
+  </Target>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PostBuildEvent>if exist '$(ProjectDir)rectangle_positions.json' xcopy '$(ProjectDir)rectangle_positions.json $(TargetDir) /Y'</PostBuildEvent>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <PostBuildEvent>if exist '$(ProjectDir)rectangle_positions.json' xcopy '$(ProjectDir)rectangle_positions.json $(TargetDir) /Y'</PostBuildEvent>
+  </PropertyGroup>
+
+  <Target Name="PrintProjectDir" AfterTargets="Build">
+    <Message Importance="high" Text="Project Directory: $(ProjectDir)" />
+  </Target>
+</Project>

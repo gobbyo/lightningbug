@@ -18,7 +18,7 @@ servos, leds and motors.
 """
 
 import time
-from i2c_helpers import RegisterStruct, StructArray
+from micropython_pca9685.i2c_helpers import RegisterStruct, StructArray
 
 
 class PWMChannel:

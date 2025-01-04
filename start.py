@@ -1,6 +1,6 @@
 import asyncio
 from machine import Pin, I2C
-from pca9685 import PCA9685
+from micropython_pca9685 import PCA9685
 import time
 import ujson
 import uio
@@ -34,6 +34,8 @@ async def main():
             pca.channels[json_data["steps"][i]["ch"]].duty_cycle = percentage_to_duty_cycle(json_data["steps"][i]["val"])
         elif json_data["steps"][i]["type"] == "sleep":
             time.sleep(json_data["steps"][i]["val"])
+        else:
+            print("Unknown type: ", json_data["steps"][i]["type"])
 
     print("Total steps: ", steps)
 if __name__ == "__main__":
