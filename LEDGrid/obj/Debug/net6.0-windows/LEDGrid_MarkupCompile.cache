@@ -4,12 +4,12 @@
 winexe
 C#
 .cs
-C:\repos\LEDGrid\LEDGrid\obj\Debug\net6.0-windows\
+C:\repos\lightningbug\LEDGrid\obj\Debug\net6.0-windows\
 LEDGrid
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-C:\repos\LEDGrid\LEDGrid\App.xaml
+C:\repos\lightningbug\LEDGrid\App.xaml
 11407045341
 
 5-492940831

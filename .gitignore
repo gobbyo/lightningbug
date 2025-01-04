@@ -6,6 +6,12 @@ __pycache__/
 # C extensions
 *.so
 
+# C#
+*.dll
+*.exe
+*.pdb
+*.sln
+
 # Distribution / packaging
 .Python
 build/
