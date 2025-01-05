@@ -11,7 +11,7 @@ namespace LEDGrid
 
     public class LED
     {
-        public int Seq { get; set; }
+        public int Ref { get; set; }
         public int CellX { get; set; }
         public int CellY { get; set; }
         public int Lumin { get; set; } = 4096;

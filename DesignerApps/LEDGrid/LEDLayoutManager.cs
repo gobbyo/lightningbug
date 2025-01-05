@@ -80,7 +80,7 @@ namespace LEDGrid
             int newSeq = 1;
             foreach (var rectPos in LEDPositions)
             {
-                rectPos.Seq = newSeq++;
+                rectPos.Ref = newSeq++;
             }
 
             // Clear and repaint all rectangles with updated sequence numbers
@@ -92,7 +92,7 @@ namespace LEDGrid
             }
             foreach (var pos in LEDPositions)
             {
-                PaintLED(pos.CellX * rectangleWidth, pos.CellY * rectangleHeight, pos.CellX, pos.CellY, pos.Seq);
+                PaintLED(pos.CellX * rectangleWidth, pos.CellY * rectangleHeight, pos.CellX, pos.CellY, pos.Ref);
             }
         }
 
@@ -113,7 +113,7 @@ namespace LEDGrid
             }
             foreach (var pos in LEDPositions)
             {
-                PaintLED(pos.CellX * rectangleWidth, pos.CellY * rectangleHeight, pos.CellX, pos.CellY, pos.Seq);
+                PaintLED(pos.CellX * rectangleWidth, pos.CellY * rectangleHeight, pos.CellX, pos.CellY, pos.Ref);
             }
         }
 
@@ -131,7 +131,7 @@ namespace LEDGrid
             }
             foreach (var pos in LEDPositions)
             {
-                PaintLED(pos.CellX * rectangleWidth, pos.CellY * rectangleHeight, pos.CellX, pos.CellY, pos.Seq);
+                PaintLED(pos.CellX * rectangleWidth, pos.CellY * rectangleHeight, pos.CellX, pos.CellY, pos.Ref);
             }
 
             // Update the grid size
