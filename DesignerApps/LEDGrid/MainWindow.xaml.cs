@@ -15,7 +15,7 @@ namespace LEDGrid
     {
         private const int DefaultRectangleWidth = 30;
         private const int DefaultRectangleHeight = 50;
-        private RectangleManager rectangleManager;
+        private LEDLayoutManager LEDLayoutManager;
         private GridDisplay gridDisplay;
 
         public MainWindow()
@@ -45,8 +45,8 @@ namespace LEDGrid
             }
 
             gridDisplay = new GridDisplay(MainCanvas, rectangleWidth, rectangleHeight);
-            rectangleManager = new RectangleManager(MainCanvas, rectangleWidth, rectangleHeight, gridDisplay);
-            rectangleManager.LoadRectanglePositions();
+            LEDLayoutManager = new LEDLayoutManager(MainCanvas, rectangleWidth, rectangleHeight, gridDisplay);
+            LEDLayoutManager.LoadRectanglePositions();
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -59,10 +59,10 @@ namespace LEDGrid
             var position = e.GetPosition(MainCanvas); // Get the position relative to MainCanvas
 
             // Snap the position to the nearest grid cell
-            int cellX = (int)(position.X / rectangleManager.RectangleWidth);
-            int cellY = (int)(position.Y / rectangleManager.RectangleHeight);
-            int posX = cellX * rectangleManager.RectangleWidth;
-            int posY = cellY * rectangleManager.RectangleHeight;
+            int cellX = (int)(position.X / LEDLayoutManager.RectangleWidth);
+            int cellY = (int)(position.Y / LEDLayoutManager.RectangleHeight);
+            int posX = cellX * LEDLayoutManager.RectangleWidth;
+            int posY = cellY * LEDLayoutManager.RectangleHeight;
 
             // Check if the click is within any existing rectangle
             var rectangleToRemove = MainCanvas.Children.OfType<Grid>()
@@ -76,22 +76,22 @@ namespace LEDGrid
             if (rectangleToRemove != null)
             {
                 MainCanvas.Children.Remove(rectangleToRemove);
-                var rectPosToRemove = rectangleManager.RectanglePositions.FirstOrDefault(rp =>
+                var rectPosToRemove = LEDLayoutManager.RectanglePositions.FirstOrDefault(rp =>
                     rp.CellX == cellX && rp.CellY == cellY);
                 if (rectPosToRemove != null)
                 {
-                    rectangleManager.RectanglePositions.Remove(rectPosToRemove);
-                    rectangleManager.RenumberRectangles();
+                    LEDLayoutManager.RectanglePositions.Remove(rectPosToRemove);
+                    LEDLayoutManager.RenumberRectangles();
                 }
             }
             else
             {
                 // Check if the cell is already occupied
-                bool isCellOccupied = rectangleManager.RectanglePositions.Any(rp => rp.CellX == cellX && rp.CellY == cellY);
+                bool isCellOccupied = LEDLayoutManager.RectanglePositions.Any(rp => rp.CellX == cellX && rp.CellY == cellY);
 
                 if (!isCellOccupied)
                 {
-                    rectangleManager.AddLabeledRectangle(cellX, cellY, posX, posY);
+                    LEDLayoutManager.AddLabeledRectangle(cellX, cellY, posX, posY);
                 }
             }
 
@@ -105,38 +105,38 @@ namespace LEDGrid
             {
                 if (e.Key == Key.Up)
                 {
-                    rectangleManager.ResizeRectangles(0, 1);
+                    LEDLayoutManager.ResizeRectangles(0, 1);
                 }
                 else if (e.Key == Key.Down)
                 {
-                    rectangleManager.ResizeRectangles(0, -1);
+                    LEDLayoutManager.ResizeRectangles(0, -1);
                 }
                 else if (e.Key == Key.Left)
                 {
-                    rectangleManager.ResizeRectangles(-1, 0);
+                    LEDLayoutManager.ResizeRectangles(-1, 0);
                 }
                 else if (e.Key == Key.Right)
                 {
-                    rectangleManager.ResizeRectangles(1, 0);
+                    LEDLayoutManager.ResizeRectangles(1, 0);
                 }
             }
             else
             {
                 if (e.Key == Key.Left)
                 {
-                    rectangleManager.MoveRectangles(-1, 0);
+                    LEDLayoutManager.MoveRectangles(-1, 0);
                 }
                 else if (e.Key == Key.Right)
                 {
-                    rectangleManager.MoveRectangles(1, 0);
+                    LEDLayoutManager.MoveRectangles(1, 0);
                 }
                 else if (e.Key == Key.Up)
                 {
-                    rectangleManager.MoveRectangles(0, -1);
+                    LEDLayoutManager.MoveRectangles(0, -1);
                 }
                 else if (e.Key == Key.Down)
                 {
-                    rectangleManager.MoveRectangles(0, 1);
+                    LEDLayoutManager.MoveRectangles(0, 1);
                 }
             }
 
@@ -146,7 +146,7 @@ namespace LEDGrid
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            rectangleManager.SaveRectanglePositions();
+            LEDLayoutManager.SaveRectanglePositions();
         }
     }
 }

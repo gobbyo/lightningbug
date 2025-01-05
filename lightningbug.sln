@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DesignerApps", "DesignerApps", "{9387614C-E0FB-495E-B0F7-C3DA2E81B4E6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DesignerApps", "DesignerApps", "{8A2CF399-C38D-4842-96B2-EEECBE3D5194}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LEDGrid", "DesignerApps\LEDGrid\LEDGrid.csproj", "{21192FEE-D83D-4F09-A05B-38F98F254A5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LEDGrid", "DesignerApps\LEDGrid\LEDGrid.csproj", "{AE4A7799-751F-4F4E-8C5A-C71775D01ACF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,18 +13,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{21192FEE-D83D-4F09-A05B-38F98F254A5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{21192FEE-D83D-4F09-A05B-38F98F254A5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{21192FEE-D83D-4F09-A05B-38F98F254A5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{21192FEE-D83D-4F09-A05B-38F98F254A5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE4A7799-751F-4F4E-8C5A-C71775D01ACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE4A7799-751F-4F4E-8C5A-C71775D01ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE4A7799-751F-4F4E-8C5A-C71775D01ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE4A7799-751F-4F4E-8C5A-C71775D01ACF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{21192FEE-D83D-4F09-A05B-38F98F254A5D} = {9387614C-E0FB-495E-B0F7-C3DA2E81B4E6}
+		{AE4A7799-751F-4F4E-8C5A-C71775D01ACF} = {8A2CF399-C38D-4842-96B2-EEECBE3D5194}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D0EE78D7-702E-4DDF-8695-2594F86CB681}
+		SolutionGuid = {38FBB61A-7A65-49DE-80B9-C7BC2095B366}
 	EndGlobalSection
 EndGlobal

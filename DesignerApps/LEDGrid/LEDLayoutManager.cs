@@ -9,7 +9,7 @@ using System.Windows.Shapes;
 
 namespace LEDGrid
 {
-    public class RectangleManager
+    public class LEDLayoutManager
     {
         private readonly Canvas mainCanvas;
         private readonly GridDisplay gridDisplay;
@@ -21,7 +21,7 @@ namespace LEDGrid
         public int RectangleWidth => rectangleWidth;
         public int RectangleHeight => rectangleHeight;
 
-        public RectangleManager(Canvas canvas, int rectWidth, int rectHeight, GridDisplay display)
+        public LEDLayoutManager(Canvas canvas, int rectWidth, int rectHeight, GridDisplay display)
         {
             mainCanvas = canvas;
             rectangleWidth = rectWidth;
