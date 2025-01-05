@@ -1,7 +1,7 @@
 {
   "RectangleWidth": 37,
   "RectangleHeight": 66,
-  "RectanglePositions": [
+  "LEDPositions": [
     {
       "Seq": 1,
       "CellX": 3,

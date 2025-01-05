@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LEDGrid")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b272c9533f5823995f184ba512fcbde4153e06e2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+de68c02fb01c56ab24c8caecf1ab11ab511d3048")]
 [assembly: System.Reflection.AssemblyProductAttribute("LEDGrid")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LEDGrid")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

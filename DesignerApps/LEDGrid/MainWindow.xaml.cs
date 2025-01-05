@@ -13,8 +13,8 @@ namespace LEDGrid
 {
     public partial class MainWindow : Window
     {
-        private const int DefaultRectangleWidth = 30;
-        private const int DefaultRectangleHeight = 50;
+        private const int DefaultLEDWidth = 30;
+        private const int DefaultLEDHeight = 50;
         private LEDLayoutManager LEDLayoutManager;
         private GridDisplay gridDisplay;
 
@@ -29,8 +29,8 @@ namespace LEDGrid
             this.Closing += MainWindow_Closing;
             this.Loaded += MainWindow_Loaded;
 
-            int rectangleWidth = DefaultRectangleWidth;
-            int rectangleHeight = DefaultRectangleHeight;
+            int rectangleWidth = DefaultLEDWidth;
+            int rectangleHeight = DefaultLEDHeight;
 
             // Load grid size from JSON file if available
             if (File.Exists("rectangle_positions.json"))
@@ -46,7 +46,7 @@ namespace LEDGrid
 
             gridDisplay = new GridDisplay(MainCanvas, rectangleWidth, rectangleHeight);
             LEDLayoutManager = new LEDLayoutManager(MainCanvas, rectangleWidth, rectangleHeight, gridDisplay);
-            LEDLayoutManager.LoadRectanglePositions();
+            LEDLayoutManager.LoadLEDPositions();
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -76,22 +76,22 @@ namespace LEDGrid
             if (rectangleToRemove != null)
             {
                 MainCanvas.Children.Remove(rectangleToRemove);
-                var rectPosToRemove = LEDLayoutManager.RectanglePositions.FirstOrDefault(rp =>
+                var rectPosToRemove = LEDLayoutManager.LEDPositions.FirstOrDefault(rp =>
                     rp.CellX == cellX && rp.CellY == cellY);
                 if (rectPosToRemove != null)
                 {
-                    LEDLayoutManager.RectanglePositions.Remove(rectPosToRemove);
-                    LEDLayoutManager.RenumberRectangles();
+                    LEDLayoutManager.LEDPositions.Remove(rectPosToRemove);
+                    LEDLayoutManager.RenumberLEDs();
                 }
             }
             else
             {
                 // Check if the cell is already occupied
-                bool isCellOccupied = LEDLayoutManager.RectanglePositions.Any(rp => rp.CellX == cellX && rp.CellY == cellY);
+                bool isCellOccupied = LEDLayoutManager.LEDPositions.Any(rp => rp.CellX == cellX && rp.CellY == cellY);
 
                 if (!isCellOccupied)
                 {
-                    LEDLayoutManager.AddLabeledRectangle(cellX, cellY, posX, posY);
+                    LEDLayoutManager.AddLabeledLED(cellX, cellY, posX, posY);
                 }
             }
 
@@ -105,38 +105,38 @@ namespace LEDGrid
             {
                 if (e.Key == Key.Up)
                 {
-                    LEDLayoutManager.ResizeRectangles(0, 1);
+                    LEDLayoutManager.ResizeLEDs(0, 1);
                 }
                 else if (e.Key == Key.Down)
                 {
-                    LEDLayoutManager.ResizeRectangles(0, -1);
+                    LEDLayoutManager.ResizeLEDs(0, -1);
                 }
                 else if (e.Key == Key.Left)
                 {
-                    LEDLayoutManager.ResizeRectangles(-1, 0);
+                    LEDLayoutManager.ResizeLEDs(-1, 0);
                 }
                 else if (e.Key == Key.Right)
                 {
-                    LEDLayoutManager.ResizeRectangles(1, 0);
+                    LEDLayoutManager.ResizeLEDs(1, 0);
                 }
             }
             else
             {
                 if (e.Key == Key.Left)
                 {
-                    LEDLayoutManager.MoveRectangles(-1, 0);
+                    LEDLayoutManager.MoveLEDs(-1, 0);
                 }
                 else if (e.Key == Key.Right)
                 {
-                    LEDLayoutManager.MoveRectangles(1, 0);
+                    LEDLayoutManager.MoveLEDs(1, 0);
                 }
                 else if (e.Key == Key.Up)
                 {
-                    LEDLayoutManager.MoveRectangles(0, -1);
+                    LEDLayoutManager.MoveLEDs(0, -1);
                 }
                 else if (e.Key == Key.Down)
                 {
-                    LEDLayoutManager.MoveRectangles(0, 1);
+                    LEDLayoutManager.MoveLEDs(0, 1);
                 }
             }
 
@@ -146,7 +146,7 @@ namespace LEDGrid
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            LEDLayoutManager.SaveRectanglePositions();
+            LEDLayoutManager.SaveLEDPositions();
         }
     }
 }

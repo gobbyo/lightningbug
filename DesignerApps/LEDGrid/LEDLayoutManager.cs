@@ -15,8 +15,8 @@ namespace LEDGrid
         private readonly GridDisplay gridDisplay;
         private int rectangleWidth;
         private int rectangleHeight;
-        private List<RectanglePosition> rectanglePositions = new List<RectanglePosition>();
-        public List<RectanglePosition> RectanglePositions => rectanglePositions;
+        private List<LEDPosition> layout = new List<LEDPosition>();
+        public List<LEDPosition> LEDPositions { get; private set; } = new List<LEDPosition>();
 
         public int RectangleWidth => rectangleWidth;
         public int RectangleHeight => rectangleHeight;
@@ -29,13 +29,13 @@ namespace LEDGrid
             gridDisplay = display;
         }
 
-        public void AddLabeledRectangle(int cellX, int cellY, int posX, int posY)
+        public void AddLabeledLED(int cellX, int cellY, int posX, int posY)
         {
-            AddRectangleToList(cellX, cellY);
-            RenumberRectangles();
+            AddLEDToList(cellX, cellY);
+            RenumberLEDs();
         }
 
-        public void PaintRectangle(int posX, int posY, int cellX, int cellY, int seq)
+        public void PaintLED(int posX, int posY, int cellX, int cellY, int seq)
         {
             var newRectangle = new Rectangle
             {
@@ -70,15 +70,15 @@ namespace LEDGrid
             mainCanvas.Children.Add(container);
         }
 
-        public void AddRectangleToList(int cellX, int cellY)
+        public void AddLEDToList(int cellX, int cellY)
         {
-            rectanglePositions.Add(new RectanglePosition { CellX = cellX, CellY = cellY });
+            LEDPositions.Add(new LEDPosition { CellX = cellX, CellY = cellY });
         }
 
-        public void RenumberRectangles()
+        public void RenumberLEDs()
         {
             int newSeq = 1;
-            foreach (var rectPos in rectanglePositions)
+            foreach (var rectPos in LEDPositions)
             {
                 rectPos.Seq = newSeq++;
             }
@@ -90,15 +90,15 @@ namespace LEDGrid
             {
                 mainCanvas.Children.Add(line);
             }
-            foreach (var pos in rectanglePositions)
+            foreach (var pos in LEDPositions)
             {
-                PaintRectangle(pos.CellX * rectangleWidth, pos.CellY * rectangleHeight, pos.CellX, pos.CellY, pos.Seq);
+                PaintLED(pos.CellX * rectangleWidth, pos.CellY * rectangleHeight, pos.CellX, pos.CellY, pos.Seq);
             }
         }
 
-        public void MoveRectangles(int deltaX, int deltaY)
+        public void MoveLEDs(int deltaX, int deltaY)
         {
-            foreach (var rectPos in rectanglePositions)
+            foreach (var rectPos in LEDPositions)
             {
                 rectPos.CellX += deltaX;
                 rectPos.CellY += deltaY;
@@ -111,13 +111,13 @@ namespace LEDGrid
             {
                 mainCanvas.Children.Add(line);
             }
-            foreach (var pos in rectanglePositions)
+            foreach (var pos in LEDPositions)
             {
-                PaintRectangle(pos.CellX * rectangleWidth, pos.CellY * rectangleHeight, pos.CellX, pos.CellY, pos.Seq);
+                PaintLED(pos.CellX * rectangleWidth, pos.CellY * rectangleHeight, pos.CellX, pos.CellY, pos.Seq);
             }
         }
 
-        public void ResizeRectangles(int deltaX, int deltaY)
+        public void ResizeLEDs(int deltaX, int deltaY)
         {
             rectangleWidth = Math.Max(1, rectangleWidth + deltaX);
             rectangleHeight = Math.Max(1, rectangleHeight + deltaY);
@@ -129,20 +129,20 @@ namespace LEDGrid
             {
                 mainCanvas.Children.Add(line);
             }
-            foreach (var pos in rectanglePositions)
+            foreach (var pos in LEDPositions)
             {
-                PaintRectangle(pos.CellX * rectangleWidth, pos.CellY * rectangleHeight, pos.CellX, pos.CellY, pos.Seq);
+                PaintLED(pos.CellX * rectangleWidth, pos.CellY * rectangleHeight, pos.CellX, pos.CellY, pos.Seq);
             }
 
             // Update the grid size
             gridDisplay.UpdateGridSize(rectangleWidth, rectangleHeight);
         }
 
-        public void SaveRectanglePositions()
+        public void SaveLEDPositions()
         {
             var saveData = new SaveData
             {
-                RectanglePositions = rectanglePositions,
+                LEDPositions = LEDPositions,
                 RectangleWidth = rectangleWidth,
                 RectangleHeight = rectangleHeight
             };
@@ -155,18 +155,18 @@ namespace LEDGrid
             File.WriteAllText("rectangle_positions.json", json);
         }
 
-        public void LoadRectanglePositions()
+        public void LoadLEDPositions()
         {
             if (File.Exists("rectangle_positions.json"))
             {
                 var json = File.ReadAllText("rectangle_positions.json");
                 var saveData = JsonSerializer.Deserialize<SaveData>(json);
 
-                rectanglePositions = saveData.RectanglePositions;
+                LEDPositions = saveData.LEDPositions;
                 rectangleWidth = saveData.RectangleWidth;
                 rectangleHeight = saveData.RectangleHeight;
 
-                RenumberRectangles();
+                RenumberLEDs();
             }
         }
     }

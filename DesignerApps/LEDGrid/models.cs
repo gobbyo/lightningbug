@@ -6,10 +6,10 @@ namespace LEDGrid
     {
         public int RectangleWidth { get; set; }
         public int RectangleHeight { get; set; }
-        public List<RectanglePosition> RectanglePositions { get; set; }
+        public List<LEDPosition> LEDPositions { get; set; }
     }
 
-    public class RectanglePosition
+    public class LEDPosition
     {
         public int Seq { get; set; }
         public int CellX { get; set; }
