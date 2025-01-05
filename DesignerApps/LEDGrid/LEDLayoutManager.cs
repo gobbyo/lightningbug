@@ -18,8 +18,8 @@ namespace LEDGrid
         private List<LED> layout = new List<LED>();
         public List<LED> LEDPositions { get; private set; } = new List<LED>();
 
-        public int RectangleWidth => rectangleWidth;
-        public int RectangleHeight => rectangleHeight;
+        public int Width => rectangleWidth;
+        public int Height => rectangleHeight;
 
         public LEDLayoutManager(Canvas canvas, int rectWidth, int rectHeight, GridDisplay display)
         {
@@ -143,8 +143,8 @@ namespace LEDGrid
             var saveData = new SaveData
             {
                 LEDPositions = LEDPositions,
-                RectangleWidth = rectangleWidth,
-                RectangleHeight = rectangleHeight
+                Width = rectangleWidth,
+                Height = rectangleHeight
             };
 
             var options = new JsonSerializerOptions
@@ -163,8 +163,8 @@ namespace LEDGrid
                 var saveData = JsonSerializer.Deserialize<SaveData>(json);
 
                 LEDPositions = saveData.LEDPositions;
-                rectangleWidth = saveData.RectangleWidth;
-                rectangleHeight = saveData.RectangleHeight;
+                rectangleWidth = saveData.Width;
+                rectangleHeight = saveData.Height;
 
                 RenumberLEDs();
             }

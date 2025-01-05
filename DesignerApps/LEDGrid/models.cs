@@ -4,8 +4,8 @@ namespace LEDGrid
 {
     public class SaveData
     {
-        public int RectangleWidth { get; set; }
-        public int RectangleHeight { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
         public List<LED> LEDPositions { get; set; }
     }
 

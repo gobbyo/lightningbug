@@ -39,8 +39,8 @@ namespace LEDGrid
                 var saveData = JsonSerializer.Deserialize<SaveData>(json);
                 if (saveData != null)
                 {
-                    rectangleWidth = saveData.RectangleWidth;
-                    rectangleHeight = saveData.RectangleHeight;
+                    rectangleWidth = saveData.Width;
+                    rectangleHeight = saveData.Height;
                 }
             }
 
@@ -59,10 +59,10 @@ namespace LEDGrid
             var position = e.GetPosition(MainCanvas); // Get the position relative to MainCanvas
 
             // Snap the position to the nearest grid cell
-            int cellX = (int)(position.X / LEDLayoutManager.RectangleWidth);
-            int cellY = (int)(position.Y / LEDLayoutManager.RectangleHeight);
-            int posX = cellX * LEDLayoutManager.RectangleWidth;
-            int posY = cellY * LEDLayoutManager.RectangleHeight;
+            int cellX = (int)(position.X / LEDLayoutManager.Width);
+            int cellY = (int)(position.Y / LEDLayoutManager.Height);
+            int posX = cellX * LEDLayoutManager.Width;
+            int posY = cellY * LEDLayoutManager.Height;
 
             // Check if the click is within any existing rectangle
             var rectangleToRemove = MainCanvas.Children.OfType<Grid>()

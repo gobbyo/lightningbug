@@ -1,9 +1,9 @@
 {
-  "RectangleWidth": 37,
-  "RectangleHeight": 66,
+  "Width": 30,
+  "Height": 60,
   "LEDPositions": [
     {
-      "Seq": 1,
+      "Ref": 1,
       "CellX": 3,
       "CellY": 0,
       "Lumin": 4096,
@@ -11,7 +11,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 2,
+      "Ref": 2,
       "CellX": 2,
       "CellY": 1,
       "Lumin": 4096,
@@ -19,7 +19,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 3,
+      "Ref": 3,
       "CellX": 1,
       "CellY": 2,
       "Lumin": 4096,
@@ -27,7 +27,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 4,
+      "Ref": 4,
       "CellX": 0,
       "CellY": 3,
       "Lumin": 4096,
@@ -35,7 +35,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 5,
+      "Ref": 5,
       "CellX": 1,
       "CellY": 4,
       "Lumin": 4096,
@@ -43,7 +43,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 6,
+      "Ref": 6,
       "CellX": 2,
       "CellY": 5,
       "Lumin": 4096,
@@ -51,7 +51,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 7,
+      "Ref": 7,
       "CellX": 3,
       "CellY": 6,
       "Lumin": 4096,
@@ -59,7 +59,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 8,
+      "Ref": 8,
       "CellX": 4,
       "CellY": 6,
       "Lumin": 4096,
@@ -67,7 +67,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 9,
+      "Ref": 9,
       "CellX": 5,
       "CellY": 6,
       "Lumin": 4096,
@@ -75,7 +75,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 10,
+      "Ref": 10,
       "CellX": 6,
       "CellY": 6,
       "Lumin": 4096,
@@ -83,7 +83,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 11,
+      "Ref": 11,
       "CellX": 7,
       "CellY": 6,
       "Lumin": 4096,
@@ -91,7 +91,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 12,
+      "Ref": 12,
       "CellX": 8,
       "CellY": 5,
       "Lumin": 4096,
@@ -99,7 +99,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 13,
+      "Ref": 13,
       "CellX": 9,
       "CellY": 4,
       "Lumin": 4096,
@@ -107,7 +107,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 14,
+      "Ref": 14,
       "CellX": 10,
       "CellY": 3,
       "Lumin": 4096,
@@ -115,7 +115,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 15,
+      "Ref": 15,
       "CellX": 9,
       "CellY": 2,
       "Lumin": 4096,
@@ -123,7 +123,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 16,
+      "Ref": 16,
       "CellX": 8,
       "CellY": 1,
       "Lumin": 4096,
@@ -131,7 +131,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 17,
+      "Ref": 17,
       "CellX": 6,
       "CellY": 0,
       "Lumin": 4096,
@@ -139,7 +139,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 18,
+      "Ref": 18,
       "CellX": 5,
       "CellY": 0,
       "Lumin": 4096,
@@ -147,7 +147,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 19,
+      "Ref": 19,
       "CellX": 4,
       "CellY": 0,
       "Lumin": 4096,
@@ -155,7 +155,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 20,
+      "Ref": 20,
       "CellX": 7,
       "CellY": 0,
       "Lumin": 4096,
@@ -163,7 +163,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 21,
+      "Ref": 21,
       "CellX": 4,
       "CellY": 5,
       "Lumin": 4096,
@@ -171,7 +171,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 22,
+      "Ref": 22,
       "CellX": 3,
       "CellY": 4,
       "Lumin": 4096,
@@ -179,7 +179,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 23,
+      "Ref": 23,
       "CellX": 2,
       "CellY": 3,
       "Lumin": 4096,
@@ -187,7 +187,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 24,
+      "Ref": 24,
       "CellX": 3,
       "CellY": 2,
       "Lumin": 4096,
@@ -195,7 +195,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 25,
+      "Ref": 25,
       "CellX": 4,
       "CellY": 1,
       "Lumin": 4096,
@@ -203,7 +203,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 26,
+      "Ref": 26,
       "CellX": 5,
       "CellY": 1,
       "Lumin": 4096,
@@ -211,7 +211,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 27,
+      "Ref": 27,
       "CellX": 6,
       "CellY": 1,
       "Lumin": 4096,
@@ -219,7 +219,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 28,
+      "Ref": 28,
       "CellX": 7,
       "CellY": 2,
       "Lumin": 4096,
@@ -227,7 +227,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 29,
+      "Ref": 29,
       "CellX": 8,
       "CellY": 3,
       "Lumin": 4096,
@@ -235,7 +235,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 30,
+      "Ref": 30,
       "CellX": 7,
       "CellY": 4,
       "Lumin": 4096,
@@ -243,7 +243,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 31,
+      "Ref": 31,
       "CellX": 6,
       "CellY": 5,
       "Lumin": 4096,
@@ -251,7 +251,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 32,
+      "Ref": 32,
       "CellX": 5,
       "CellY": 5,
       "Lumin": 4096,
@@ -259,7 +259,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 33,
+      "Ref": 33,
       "CellX": 11,
       "CellY": 4,
       "Lumin": 4096,
@@ -267,7 +267,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 34,
+      "Ref": 34,
       "CellX": 12,
       "CellY": 5,
       "Lumin": 4096,
@@ -275,7 +275,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 35,
+      "Ref": 35,
       "CellX": 13,
       "CellY": 6,
       "Lumin": 4096,
@@ -283,7 +283,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 36,
+      "Ref": 36,
       "CellX": 14,
       "CellY": 6,
       "Lumin": 4096,
@@ -291,7 +291,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 37,
+      "Ref": 37,
       "CellX": 15,
       "CellY": 6,
       "Lumin": 4096,
@@ -299,7 +299,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 38,
+      "Ref": 38,
       "CellX": 16,
       "CellY": 6,
       "Lumin": 4096,
@@ -307,7 +307,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 39,
+      "Ref": 39,
       "CellX": 17,
       "CellY": 6,
       "Lumin": 4096,
@@ -315,7 +315,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 40,
+      "Ref": 40,
       "CellX": 18,
       "CellY": 5,
       "Lumin": 4096,
@@ -323,7 +323,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 41,
+      "Ref": 41,
       "CellX": 19,
       "CellY": 4,
       "Lumin": 4096,
@@ -331,7 +331,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 42,
+      "Ref": 42,
       "CellX": 20,
       "CellY": 3,
       "Lumin": 4096,
@@ -339,7 +339,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 43,
+      "Ref": 43,
       "CellX": 19,
       "CellY": 2,
       "Lumin": 4096,
@@ -347,7 +347,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 44,
+      "Ref": 44,
       "CellX": 18,
       "CellY": 1,
       "Lumin": 4096,
@@ -355,7 +355,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 45,
+      "Ref": 45,
       "CellX": 17,
       "CellY": 0,
       "Lumin": 4096,
@@ -363,7 +363,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 46,
+      "Ref": 46,
       "CellX": 16,
       "CellY": 0,
       "Lumin": 4096,
@@ -371,7 +371,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 47,
+      "Ref": 47,
       "CellX": 15,
       "CellY": 0,
       "Lumin": 4096,
@@ -379,7 +379,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 48,
+      "Ref": 48,
       "CellX": 14,
       "CellY": 0,
       "Lumin": 4096,
@@ -387,7 +387,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 49,
+      "Ref": 49,
       "CellX": 13,
       "CellY": 0,
       "Lumin": 4096,
@@ -395,7 +395,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 50,
+      "Ref": 50,
       "CellX": 12,
       "CellY": 1,
       "Lumin": 4096,
@@ -403,7 +403,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 51,
+      "Ref": 51,
       "CellX": 11,
       "CellY": 2,
       "Lumin": 4096,
@@ -411,7 +411,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 52,
+      "Ref": 52,
       "CellX": 11,
       "CellY": 3,
       "Lumin": 4096,
@@ -419,7 +419,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 53,
+      "Ref": 53,
       "CellX": 12,
       "CellY": 3,
       "Lumin": 4096,
@@ -427,7 +427,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 54,
+      "Ref": 54,
       "CellX": 12,
       "CellY": 2,
       "Lumin": 4096,
@@ -435,7 +435,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 55,
+      "Ref": 55,
       "CellX": 12,
       "CellY": 4,
       "Lumin": 4096,
@@ -443,7 +443,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 56,
+      "Ref": 56,
       "CellX": 13,
       "CellY": 1,
       "Lumin": 4096,
@@ -451,7 +451,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 57,
+      "Ref": 57,
       "CellX": 17,
       "CellY": 1,
       "Lumin": 4096,
@@ -459,7 +459,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 58,
+      "Ref": 58,
       "CellX": 18,
       "CellY": 2,
       "Lumin": 4096,
@@ -467,7 +467,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 59,
+      "Ref": 59,
       "CellX": 19,
       "CellY": 3,
       "Lumin": 4096,
@@ -475,7 +475,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 60,
+      "Ref": 60,
       "CellX": 18,
       "CellY": 4,
       "Lumin": 4096,
@@ -483,7 +483,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 61,
+      "Ref": 61,
       "CellX": 18,
       "CellY": 3,
       "Lumin": 4096,
@@ -491,7 +491,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 62,
+      "Ref": 62,
       "CellX": 17,
       "CellY": 5,
       "Lumin": 4096,
@@ -499,7 +499,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 63,
+      "Ref": 63,
       "CellX": 13,
       "CellY": 5,
       "Lumin": 4096,
@@ -507,7 +507,7 @@
       "WaitSec": 0.125
     },
     {
-      "Seq": 64,
+      "Ref": 64,
       "CellX": 13,
       "CellY": 4,
       "Lumin": 4096,
