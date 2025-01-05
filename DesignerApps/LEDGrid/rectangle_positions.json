@@ -5,322 +5,514 @@
     {
       "Seq": 1,
       "CellX": 3,
-      "CellY": 0
+      "CellY": 0,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 2,
       "CellX": 2,
-      "CellY": 1
+      "CellY": 1,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 3,
       "CellX": 1,
-      "CellY": 2
+      "CellY": 2,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 4,
       "CellX": 0,
-      "CellY": 3
+      "CellY": 3,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 5,
       "CellX": 1,
-      "CellY": 4
+      "CellY": 4,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 6,
       "CellX": 2,
-      "CellY": 5
+      "CellY": 5,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 7,
       "CellX": 3,
-      "CellY": 6
+      "CellY": 6,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 8,
       "CellX": 4,
-      "CellY": 6
+      "CellY": 6,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 9,
       "CellX": 5,
-      "CellY": 6
+      "CellY": 6,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 10,
       "CellX": 6,
-      "CellY": 6
+      "CellY": 6,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 11,
       "CellX": 7,
-      "CellY": 6
+      "CellY": 6,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 12,
       "CellX": 8,
-      "CellY": 5
+      "CellY": 5,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 13,
       "CellX": 9,
-      "CellY": 4
+      "CellY": 4,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 14,
       "CellX": 10,
-      "CellY": 3
+      "CellY": 3,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 15,
       "CellX": 9,
-      "CellY": 2
+      "CellY": 2,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 16,
       "CellX": 8,
-      "CellY": 1
+      "CellY": 1,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 17,
       "CellX": 6,
-      "CellY": 0
+      "CellY": 0,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 18,
       "CellX": 5,
-      "CellY": 0
+      "CellY": 0,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 19,
       "CellX": 4,
-      "CellY": 0
+      "CellY": 0,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 20,
       "CellX": 7,
-      "CellY": 0
+      "CellY": 0,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 21,
       "CellX": 4,
-      "CellY": 5
+      "CellY": 5,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 22,
       "CellX": 3,
-      "CellY": 4
+      "CellY": 4,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 23,
       "CellX": 2,
-      "CellY": 3
+      "CellY": 3,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 24,
       "CellX": 3,
-      "CellY": 2
+      "CellY": 2,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 25,
       "CellX": 4,
-      "CellY": 1
+      "CellY": 1,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 26,
       "CellX": 5,
-      "CellY": 1
+      "CellY": 1,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 27,
       "CellX": 6,
-      "CellY": 1
+      "CellY": 1,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 28,
       "CellX": 7,
-      "CellY": 2
+      "CellY": 2,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 29,
       "CellX": 8,
-      "CellY": 3
+      "CellY": 3,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 30,
       "CellX": 7,
-      "CellY": 4
+      "CellY": 4,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 31,
       "CellX": 6,
-      "CellY": 5
+      "CellY": 5,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 32,
       "CellX": 5,
-      "CellY": 5
+      "CellY": 5,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 33,
       "CellX": 11,
-      "CellY": 4
+      "CellY": 4,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 34,
       "CellX": 12,
-      "CellY": 5
+      "CellY": 5,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 35,
       "CellX": 13,
-      "CellY": 6
+      "CellY": 6,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 36,
       "CellX": 14,
-      "CellY": 6
+      "CellY": 6,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 37,
       "CellX": 15,
-      "CellY": 6
+      "CellY": 6,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 38,
       "CellX": 16,
-      "CellY": 6
+      "CellY": 6,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 39,
       "CellX": 17,
-      "CellY": 6
+      "CellY": 6,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 40,
       "CellX": 18,
-      "CellY": 5
+      "CellY": 5,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 41,
       "CellX": 19,
-      "CellY": 4
+      "CellY": 4,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 42,
       "CellX": 20,
-      "CellY": 3
+      "CellY": 3,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 43,
       "CellX": 19,
-      "CellY": 2
+      "CellY": 2,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 44,
       "CellX": 18,
-      "CellY": 1
+      "CellY": 1,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 45,
       "CellX": 17,
-      "CellY": 0
+      "CellY": 0,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 46,
       "CellX": 16,
-      "CellY": 0
+      "CellY": 0,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 47,
       "CellX": 15,
-      "CellY": 0
+      "CellY": 0,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 48,
       "CellX": 14,
-      "CellY": 0
+      "CellY": 0,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 49,
       "CellX": 13,
-      "CellY": 0
+      "CellY": 0,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 50,
       "CellX": 12,
-      "CellY": 1
+      "CellY": 1,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 51,
       "CellX": 11,
-      "CellY": 2
+      "CellY": 2,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 52,
       "CellX": 11,
-      "CellY": 3
+      "CellY": 3,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 53,
       "CellX": 12,
-      "CellY": 3
+      "CellY": 3,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 54,
       "CellX": 12,
-      "CellY": 2
+      "CellY": 2,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 55,
       "CellX": 12,
-      "CellY": 4
+      "CellY": 4,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 56,
       "CellX": 13,
-      "CellY": 1
+      "CellY": 1,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 57,
       "CellX": 17,
-      "CellY": 1
+      "CellY": 1,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 58,
       "CellX": 18,
-      "CellY": 2
+      "CellY": 2,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 59,
       "CellX": 19,
-      "CellY": 3
+      "CellY": 3,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 60,
       "CellX": 18,
-      "CellY": 4
+      "CellY": 4,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 61,
       "CellX": 18,
-      "CellY": 3
+      "CellY": 3,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 62,
       "CellX": 17,
-      "CellY": 5
+      "CellY": 5,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 63,
       "CellX": 13,
-      "CellY": 5
+      "CellY": 5,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     },
     {
       "Seq": 64,
       "CellX": 13,
-      "CellY": 4
+      "CellY": 4,
+      "Lumin": 4096,
+      "SleepSec": 0.25,
+      "WaitSec": 0.125
     }
   ]
 }

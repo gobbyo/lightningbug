@@ -15,8 +15,8 @@ namespace LEDGrid
         private readonly GridDisplay gridDisplay;
         private int rectangleWidth;
         private int rectangleHeight;
-        private List<LEDPosition> layout = new List<LEDPosition>();
-        public List<LEDPosition> LEDPositions { get; private set; } = new List<LEDPosition>();
+        private List<LED> layout = new List<LED>();
+        public List<LED> LEDPositions { get; private set; } = new List<LED>();
 
         public int RectangleWidth => rectangleWidth;
         public int RectangleHeight => rectangleHeight;
@@ -72,7 +72,7 @@ namespace LEDGrid
 
         public void AddLEDToList(int cellX, int cellY)
         {
-            LEDPositions.Add(new LEDPosition { CellX = cellX, CellY = cellY });
+            LEDPositions.Add(new LED { CellX = cellX, CellY = cellY });
         }
 
         public void RenumberLEDs()
