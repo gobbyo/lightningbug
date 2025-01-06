@@ -63,8 +63,7 @@ class Servo(_BaseServo):
     """Control the position of a servo.
 
        :param ~pwmio.PWMOut pwm_out: PWM output object.
-       :param int actuation_range: The physical range of motion of the servo in degrees, \
-           for the given ``min_pulse`` and ``max_pulse`` values.
+       :param int actuation_range: The physical range of motion of the servo in degrees, \n           for the given ``min_pulse`` and ``max_pulse`` values.
        :param int min_pulse: The minimum pulse width of the servo in microseconds.
        :param int max_pulse: The maximum pulse width of the servo in microseconds.
 

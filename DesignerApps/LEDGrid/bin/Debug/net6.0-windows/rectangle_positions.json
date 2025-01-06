@@ -6,7 +6,7 @@
       "Ref": 1,
       "CellX": 3,
       "CellY": 0,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -14,7 +14,7 @@
       "Ref": 2,
       "CellX": 2,
       "CellY": 1,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -22,7 +22,7 @@
       "Ref": 3,
       "CellX": 1,
       "CellY": 2,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -30,7 +30,7 @@
       "Ref": 4,
       "CellX": 0,
       "CellY": 3,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -38,7 +38,7 @@
       "Ref": 5,
       "CellX": 1,
       "CellY": 4,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -46,7 +46,7 @@
       "Ref": 6,
       "CellX": 2,
       "CellY": 5,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -54,7 +54,7 @@
       "Ref": 7,
       "CellX": 3,
       "CellY": 6,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -62,7 +62,7 @@
       "Ref": 8,
       "CellX": 4,
       "CellY": 6,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -70,7 +70,7 @@
       "Ref": 9,
       "CellX": 5,
       "CellY": 6,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -78,7 +78,7 @@
       "Ref": 10,
       "CellX": 6,
       "CellY": 6,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -86,7 +86,7 @@
       "Ref": 11,
       "CellX": 7,
       "CellY": 6,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -94,7 +94,7 @@
       "Ref": 12,
       "CellX": 8,
       "CellY": 5,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -102,7 +102,7 @@
       "Ref": 13,
       "CellX": 9,
       "CellY": 4,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -110,7 +110,7 @@
       "Ref": 14,
       "CellX": 10,
       "CellY": 3,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -118,7 +118,7 @@
       "Ref": 15,
       "CellX": 9,
       "CellY": 2,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -126,7 +126,7 @@
       "Ref": 16,
       "CellX": 8,
       "CellY": 1,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -134,7 +134,7 @@
       "Ref": 17,
       "CellX": 6,
       "CellY": 0,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -142,7 +142,7 @@
       "Ref": 18,
       "CellX": 5,
       "CellY": 0,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -150,7 +150,7 @@
       "Ref": 19,
       "CellX": 4,
       "CellY": 0,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -158,7 +158,7 @@
       "Ref": 20,
       "CellX": 7,
       "CellY": 0,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -166,7 +166,7 @@
       "Ref": 21,
       "CellX": 4,
       "CellY": 5,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -174,7 +174,7 @@
       "Ref": 22,
       "CellX": 3,
       "CellY": 4,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -182,7 +182,7 @@
       "Ref": 23,
       "CellX": 2,
       "CellY": 3,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -190,7 +190,7 @@
       "Ref": 24,
       "CellX": 3,
       "CellY": 2,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -198,7 +198,7 @@
       "Ref": 25,
       "CellX": 4,
       "CellY": 1,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -206,7 +206,7 @@
       "Ref": 26,
       "CellX": 5,
       "CellY": 1,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -214,7 +214,7 @@
       "Ref": 27,
       "CellX": 6,
       "CellY": 1,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -222,7 +222,7 @@
       "Ref": 28,
       "CellX": 7,
       "CellY": 2,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -230,7 +230,7 @@
       "Ref": 29,
       "CellX": 8,
       "CellY": 3,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -238,7 +238,7 @@
       "Ref": 30,
       "CellX": 7,
       "CellY": 4,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -246,7 +246,7 @@
       "Ref": 31,
       "CellX": 6,
       "CellY": 5,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -254,7 +254,7 @@
       "Ref": 32,
       "CellX": 5,
       "CellY": 5,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -262,7 +262,7 @@
       "Ref": 33,
       "CellX": 11,
       "CellY": 4,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -270,7 +270,7 @@
       "Ref": 34,
       "CellX": 12,
       "CellY": 5,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -278,7 +278,7 @@
       "Ref": 35,
       "CellX": 13,
       "CellY": 6,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -286,7 +286,7 @@
       "Ref": 36,
       "CellX": 14,
       "CellY": 6,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -294,7 +294,7 @@
       "Ref": 37,
       "CellX": 15,
       "CellY": 6,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -302,7 +302,7 @@
       "Ref": 38,
       "CellX": 16,
       "CellY": 6,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -310,7 +310,7 @@
       "Ref": 39,
       "CellX": 17,
       "CellY": 6,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -318,7 +318,7 @@
       "Ref": 40,
       "CellX": 18,
       "CellY": 5,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -326,7 +326,7 @@
       "Ref": 41,
       "CellX": 19,
       "CellY": 4,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -334,7 +334,7 @@
       "Ref": 42,
       "CellX": 20,
       "CellY": 3,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -342,7 +342,7 @@
       "Ref": 43,
       "CellX": 19,
       "CellY": 2,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -350,7 +350,7 @@
       "Ref": 44,
       "CellX": 18,
       "CellY": 1,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -358,7 +358,7 @@
       "Ref": 45,
       "CellX": 17,
       "CellY": 0,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -366,7 +366,7 @@
       "Ref": 46,
       "CellX": 16,
       "CellY": 0,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -374,7 +374,7 @@
       "Ref": 47,
       "CellX": 15,
       "CellY": 0,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -382,7 +382,7 @@
       "Ref": 48,
       "CellX": 14,
       "CellY": 0,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -390,7 +390,7 @@
       "Ref": 49,
       "CellX": 13,
       "CellY": 0,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -398,7 +398,7 @@
       "Ref": 50,
       "CellX": 12,
       "CellY": 1,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -406,7 +406,7 @@
       "Ref": 51,
       "CellX": 11,
       "CellY": 2,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -414,7 +414,7 @@
       "Ref": 52,
       "CellX": 11,
       "CellY": 3,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -422,7 +422,7 @@
       "Ref": 53,
       "CellX": 12,
       "CellY": 3,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -430,7 +430,7 @@
       "Ref": 54,
       "CellX": 12,
       "CellY": 2,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -438,7 +438,7 @@
       "Ref": 55,
       "CellX": 12,
       "CellY": 4,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -446,7 +446,7 @@
       "Ref": 56,
       "CellX": 13,
       "CellY": 1,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -454,7 +454,7 @@
       "Ref": 57,
       "CellX": 17,
       "CellY": 1,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -462,7 +462,7 @@
       "Ref": 58,
       "CellX": 18,
       "CellY": 2,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -470,7 +470,7 @@
       "Ref": 59,
       "CellX": 19,
       "CellY": 3,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -478,7 +478,7 @@
       "Ref": 60,
       "CellX": 18,
       "CellY": 4,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -486,7 +486,7 @@
       "Ref": 61,
       "CellX": 18,
       "CellY": 3,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -494,7 +494,7 @@
       "Ref": 62,
       "CellX": 17,
       "CellY": 5,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -502,7 +502,7 @@
       "Ref": 63,
       "CellX": 13,
       "CellY": 5,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     },
@@ -510,7 +510,7 @@
       "Ref": 64,
       "CellX": 13,
       "CellY": 4,
-      "Lumin": 4096,
+      "Lumin": 100,
       "SleepSec": 0.25,
       "WaitSec": 0.125
     }

@@ -12,14 +12,10 @@ async def main():
     i2c = I2C(1, sda=Pin(2), scl=Pin(3))  # Correct I2C pins for RP2040
     pca = PCA9685(i2c)
 
-    pca.frequency = 60
+    pca.frequency = 500
 
-    total_leds = 10
-    max_value = 0xFFFF
     percent_lumin = 100
     tail_len = 5
-    sub = percent_lumin / tail_len
-    wait = .1
 
     json_data = "{}"
     with uio.open("pattern1.json", "r") as f:

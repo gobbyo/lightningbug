@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: MIT
 
 from machine import Pin, I2C
-from pca9685 import PCA9685
+from micropython_pca9685 import PCA9685
 import json
 import time
 

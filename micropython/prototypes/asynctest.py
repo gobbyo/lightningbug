@@ -5,7 +5,7 @@ from time import sleep
 async def fade(pin, brightness = 65535, sleeplen=0.25, fadevalue=0.01):
     # Set up the PWM pin
     pwm = PWM(Pin(pin))
-    pwm.freq(50)
+    pwm.freq(1000)
     print(f"Fade pin:{pin}, sleeplen:{sleeplen}, fadevalue:{fadevalue}")
     pwm.duty_u16(brightness)
     iter = int(sleeplen/fadevalue)
@@ -20,7 +20,7 @@ async def fade(pin, brightness = 65535, sleeplen=0.25, fadevalue=0.01):
 
 # Define the main function to run the event loop
 async def main():
-    brightness = 4096
+    brightness = 20096
     sleeplen = 0.25
     waitlen = .125
     # Create tasks for fading 3 LEDs concurrently
@@ -33,7 +33,7 @@ async def main():
     for i in range(2):
         asyncio.create_task(fade(27, int(5535/(i+1)), 1))
         await asyncio.sleep(2)
-    asyncio.create_task(fade(29, 1535, 1))
+    asyncio.create_task(fade(28, 1535, 1))
     await asyncio.sleep(2)
 
 if __name__ == "__main__":
