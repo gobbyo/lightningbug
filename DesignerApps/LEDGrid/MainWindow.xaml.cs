@@ -35,9 +35,9 @@ namespace LEDGrid
             int rectangleHeight = DefaultLEDHeight;
 
             // Load grid size from JSON file if available
-            if (File.Exists("rectangle_positions.json"))
+            if (File.Exists("led_positions.json"))
             {
-                var json = File.ReadAllText("rectangle_positions.json");
+                var json = File.ReadAllText("led_positions.json");
                 var saveData = JsonSerializer.Deserialize<SaveData>(json);
                 if (saveData != null)
                 {
@@ -141,18 +141,11 @@ namespace LEDGrid
 
         private void UpdateNewJsonTextBox()
         {
-            var newSequenceData = new SaveData
-            {
-                LEDPositions = newSequenceLEDs,
-                Width = LEDLayoutManager.Width,
-                Height = LEDLayoutManager.Height
-            };
-
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true
             };
-            var json = JsonSerializer.Serialize(newSequenceData, options);
+            var json = JsonSerializer.Serialize(newSequenceLEDs, options);
             NewJsonTextBox.Text = json;
         }
 
@@ -166,19 +159,12 @@ namespace LEDGrid
 
         private void SaveNewSequence()
         {
-            var newSequenceData = new SaveData
-            {
-                LEDPositions = newSequenceLEDs,
-                Width = LEDLayoutManager.Width,
-                Height = LEDLayoutManager.Height
-            };
-
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true
             };
-            var json = JsonSerializer.Serialize(newSequenceData, options);
-            File.WriteAllText("new_sequence.json", json);
+            var json = JsonSerializer.Serialize(newSequenceLEDs, options);
+            File.WriteAllText("led_sequence.json", json);
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)

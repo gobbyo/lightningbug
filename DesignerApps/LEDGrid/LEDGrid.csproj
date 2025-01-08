@@ -7,19 +7,24 @@
   </PropertyGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Delete Files="$(OutputPath)rectangle_positions.json" />
+    <Delete Files="$(OutputPath)led_positions.json" />
   </Target>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Copy SourceFiles="rectangle_positions.json" DestinationFolder="$(OutputPath)" />
+    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Delete Files="$(OutputPath)led_sequence.json" />
   </Target>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <PostBuildEvent>if exist '$(ProjectDir)rectangle_positions.json' xcopy '$(ProjectDir)rectangle_positions.json $(TargetDir) /Y'</PostBuildEvent>
+    <PostBuildEvent>if exist '$(ProjectDir)led_positions.json' xcopy '$(ProjectDir)led_positions.json $(TargetDir) /Y'</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PostBuildEvent>if exist '$(ProjectDir)led_sequence.json' xcopy '$(ProjectDir)led_positions.json $(TargetDir) /Y'</PostBuildEvent>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <PostBuildEvent>if exist '$(ProjectDir)rectangle_positions.json' xcopy '$(ProjectDir)rectangle_positions.json $(TargetDir) /Y'</PostBuildEvent>
+    <PostBuildEvent>if exist '$(ProjectDir)led_positions.json' xcopy '$(ProjectDir)led_positions.json $(TargetDir) /Y'</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <PostBuildEvent>if exist '$(ProjectDir)led_sequence.json' xcopy '$(ProjectDir)led_positions.json $(TargetDir) /Y'</PostBuildEvent>
   </PropertyGroup>
 
   <Target Name="PrintProjectDir" AfterTargets="Build">

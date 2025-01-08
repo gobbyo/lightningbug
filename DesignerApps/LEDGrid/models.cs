@@ -16,6 +16,6 @@ namespace LEDGrid
         public int CellY { get; set; }
         public int Lumin { get; set; } = 100;
         public double SleepSec { get; set; } = 0.25;
-        public double WaitSec { get; set; } = 0.125;
+        public double WaitSec { get; set; } = 0.25;
     }
 }

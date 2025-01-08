@@ -152,14 +152,14 @@ namespace LEDGrid
                 WriteIndented = true
             };
             var json = JsonSerializer.Serialize(saveData, options);
-            File.WriteAllText("rectangle_positions.json", json);
+            File.WriteAllText("led_positions.json", json);
         }
 
         public void LoadLEDPositions()
         {
-            if (File.Exists("rectangle_positions.json"))
+            if (File.Exists("led_positions.json"))
             {
-                var json = File.ReadAllText("rectangle_positions.json");
+                var json = File.ReadAllText("led_positions.json");
                 var saveData = JsonSerializer.Deserialize<SaveData>(json);
 
                 LEDPositions = saveData.LEDPositions;
