@@ -17,6 +17,7 @@ namespace LEDGrid
         private const int DefaultLEDHeight = 50;
         private LEDLayoutManager LEDLayoutManager;
         private GridDisplay gridDisplay;
+        private List<LED> newSequenceLEDs = new List<LED>();
 
         public MainWindow()
         {
@@ -26,6 +27,7 @@ namespace LEDGrid
 
             this.MouseDown += Window_MouseDown;
             this.KeyDown += Window_KeyDown;
+            this.KeyUp += Window_KeyUp;
             this.Closing += MainWindow_Closing;
             this.Loaded += MainWindow_Loaded;
 
@@ -64,39 +66,119 @@ namespace LEDGrid
             int posX = cellX * LEDLayoutManager.Width;
             int posY = cellY * LEDLayoutManager.Height;
 
-            // Check if the click is within any existing rectangle
-            var rectangleToRemove = MainCanvas.Children.OfType<Grid>()
-                .FirstOrDefault(container =>
-                {
-                    var left = Canvas.GetLeft(container);
-                    var top = Canvas.GetTop(container);
-                    return posX == left && posY == top;
-                });
-
-            if (rectangleToRemove != null)
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
             {
-                MainCanvas.Children.Remove(rectangleToRemove);
-                var rectPosToRemove = LEDLayoutManager.LEDPositions.FirstOrDefault(rp =>
-                    rp.CellX == cellX && rp.CellY == cellY);
-                if (rectPosToRemove != null)
+                // Handle Ctrl + Left Mouse Click to add LEDs to the new sequence
+                var led = LEDLayoutManager.LEDPositions.FirstOrDefault(rp => rp.CellX == cellX && rp.CellY == cellY);
+                if (led != null)
                 {
-                    LEDLayoutManager.LEDPositions.Remove(rectPosToRemove);
-                    LEDLayoutManager.RenumberLEDs();
+                    var newLed = new LED
+                    {
+                        Ref = led.Ref,
+                        CellX = led.CellX,
+                        CellY = led.CellY,
+                        Lumin = led.Lumin,
+                        SleepSec = led.SleepSec,
+                        WaitSec = led.WaitSec
+                    };
+
+                    newSequenceLEDs.Add(newLed);
+                    HighlightLED(posX, posY);
+                    UpdateNewJsonTextBox();
                 }
             }
             else
             {
-                // Check if the cell is already occupied
-                bool isCellOccupied = LEDLayoutManager.LEDPositions.Any(rp => rp.CellX == cellX && rp.CellY == cellY);
+                // Handle normal left mouse click
+                var rectangleToRemove = MainCanvas.Children.OfType<Grid>()
+                    .FirstOrDefault(container =>
+                    {
+                        var left = Canvas.GetLeft(container);
+                        var top = Canvas.GetTop(container);
+                        return posX == left && posY == top;
+                    });
 
-                if (!isCellOccupied)
+                if (rectangleToRemove != null)
                 {
-                    LEDLayoutManager.AddLabeledLED(cellX, cellY, posX, posY);
+                    MainCanvas.Children.Remove(rectangleToRemove);
+                    var rectPosToRemove = LEDLayoutManager.LEDPositions.FirstOrDefault(rp =>
+                        rp.CellX == cellX && rp.CellY == cellY);
+                    if (rectPosToRemove != null)
+                    {
+                        LEDLayoutManager.LEDPositions.Remove(rectPosToRemove);
+                        LEDLayoutManager.RenumberLEDs();
+                    }
                 }
-            }
+                else
+                {
+                    bool isCellOccupied = LEDLayoutManager.LEDPositions.Any(rp => rp.CellX == cellX && rp.CellY == cellY);
 
-            // Ensure the grid is repainted with numbers
-            gridDisplay.PaintGrid();
+                    if (!isCellOccupied)
+                    {
+                        LEDLayoutManager.AddLabeledLED(cellX, cellY, posX, posY);
+                    }
+                }
+
+                gridDisplay.PaintGrid();
+            }
+        }
+
+        private void HighlightLED(int posX, int posY)
+        {
+            var highlightRectangle = new Rectangle
+            {
+                Width = LEDLayoutManager.Width,
+                Height = LEDLayoutManager.Height,
+                Fill = Brushes.Yellow,
+                Opacity = 0.5
+            };
+
+            Canvas.SetLeft(highlightRectangle, posX);
+            Canvas.SetTop(highlightRectangle, posY);
+
+            MainCanvas.Children.Add(highlightRectangle);
+        }
+
+        private void UpdateNewJsonTextBox()
+        {
+            var newSequenceData = new SaveData
+            {
+                LEDPositions = newSequenceLEDs,
+                Width = LEDLayoutManager.Width,
+                Height = LEDLayoutManager.Height
+            };
+
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+            var json = JsonSerializer.Serialize(newSequenceData, options);
+            NewJsonTextBox.Text = json;
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.LeftCtrl || e.Key == Key.RightCtrl)
+            {
+                SaveNewSequence();
+            }
+        }
+
+        private void SaveNewSequence()
+        {
+            var newSequenceData = new SaveData
+            {
+                LEDPositions = newSequenceLEDs,
+                Width = LEDLayoutManager.Width,
+                Height = LEDLayoutManager.Height
+            };
+
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+            var json = JsonSerializer.Serialize(newSequenceData, options);
+            File.WriteAllText("new_sequence.json", json);
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -140,7 +222,6 @@ namespace LEDGrid
                 }
             }
 
-            // Ensure the grid is repainted with numbers
             gridDisplay.PaintGrid();
         }
 

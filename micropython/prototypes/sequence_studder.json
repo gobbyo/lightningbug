@@ -1,0 +1,134 @@
+{
+  "Width": 30,
+  "Height": 32,
+  "LEDPositions": [
+    {
+      "Ref": 1,
+      "CellX": 5,
+      "CellY": 7,
+      "Lumin": 100,
+      "SleepSec": 0.125,
+      "WaitSec": 0.05
+    },
+    {
+      "Ref": 2,
+      "CellX": 6,
+      "CellY": 6,
+      "Lumin": 100,
+      "SleepSec": 0.125,
+      "WaitSec": 0.05
+    },
+    {
+      "Ref": 3,
+      "CellX": 7,
+      "CellY": 5,
+      "Lumin": 100,
+      "SleepSec": 0.125,
+      "WaitSec": 0.05
+    },
+    {
+      "Ref": 4,
+      "CellX": 8,
+      "CellY": 4,
+      "Lumin": 100,
+      "SleepSec": 0.125,
+      "WaitSec": 0.05
+    },
+    {
+      "Ref": 5,
+      "CellX": 8,
+      "CellY": 3,
+      "Lumin": 100,
+      "SleepSec": 0.125,
+      "WaitSec": 0.05
+    },
+    {
+      "Ref": 6,
+      "CellX": 7,
+      "CellY": 2,
+      "Lumin": 100,
+      "SleepSec": 0.125,
+      "WaitSec": 0.05
+    },
+    {
+      "Ref": 7,
+      "CellX": 6,
+      "CellY": 1,
+      "Lumin": 100,
+      "SleepSec": 0.125,
+      "WaitSec": 0.05
+    },
+    {
+      "Ref": 8,
+      "CellX": 5,
+      "CellY": 0,
+      "Lumin": 100,
+      "SleepSec": 0.125,
+      "WaitSec": 0.05
+    },
+    {
+      "Ref": 9,
+      "CellX": 4,
+      "CellY": 0,
+      "Lumin": 100,
+      "SleepSec": 0.125,
+      "WaitSec": 0.05
+    },
+    {
+      "Ref": 10,
+      "CellX": 3,
+      "CellY": 1,
+      "Lumin": 100,
+      "SleepSec": 0.125,
+      "WaitSec": 0.05
+    },
+    {
+      "Ref": 11,
+      "CellX": 2,
+      "CellY": 2,
+      "Lumin": 100,
+      "SleepSec": 0.125,
+      "WaitSec": 0.05
+    },
+    {
+      "Ref": 12,
+      "CellX": 1,
+      "CellY": 3,
+      "Lumin": 100,
+      "SleepSec": 0.125,
+      "WaitSec": 0.05
+    },
+    {
+      "Ref": 13,
+      "CellX": 1,
+      "CellY": 4,
+      "Lumin": 100,
+      "SleepSec": 0.125,
+      "WaitSec": 0.05
+    },
+    {
+      "Ref": 14,
+      "CellX": 2,
+      "CellY": 5,
+      "Lumin": 100,
+      "SleepSec": 0.125,
+      "WaitSec": 0.05
+    },
+    {
+      "Ref": 15,
+      "CellX": 3,
+      "CellY": 6,
+      "Lumin": 100,
+      "SleepSec": 0.125,
+      "WaitSec": 0.05
+    },
+    {
+      "Ref": 16,
+      "CellX": 4,
+      "CellY": 7,
+      "Lumin": 100,
+      "SleepSec": 0.125,
+      "WaitSec": 0.05
+    }
+  ]
+}
