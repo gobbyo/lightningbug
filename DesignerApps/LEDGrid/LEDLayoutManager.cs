@@ -77,7 +77,7 @@ namespace LEDGrid
 
         public void RenumberLEDs()
         {
-            int newSeq = 1;
+            int newSeq = 0;
             foreach (var rectPos in LEDPositions)
             {
                 rectPos.Ref = newSeq++;

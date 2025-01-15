@@ -1,0 +1,74 @@
+[
+  {
+    "Ref": 8,
+    "CellX": 2,
+    "CellY": 0,
+    "Lumin": 100,
+    "SleepSec": 0.125,
+    "WaitSec": 0.05
+  },
+  {
+    "Ref": 9,
+    "CellX": 1,
+    "CellY": 1,
+    "Lumin": 100,
+    "SleepSec": 0.125,
+    "WaitSec": 0.05
+  },
+  {
+    "Ref": 10,
+    "CellX": 0,
+    "CellY": 2,
+    "Lumin": 100,
+    "SleepSec": 0.125,
+    "WaitSec": 0.05
+  },
+  {
+    "Ref": 11,
+    "CellX": 0,
+    "CellY": 3,
+    "Lumin": 100,
+    "SleepSec": 0.125,
+    "WaitSec": 0.05
+  },
+  {
+    "Ref": 12,
+    "CellX": 0,
+    "CellY": 4,
+    "Lumin": 100,
+    "SleepSec": 0.125,
+    "WaitSec": 0.05
+  },
+  {
+    "Ref": 13,
+    "CellX": 1,
+    "CellY": 5,
+    "Lumin": 100,
+    "SleepSec": 0.125,
+    "WaitSec": 0.05
+  },
+  {
+    "Ref": 14,
+    "CellX": 2,
+    "CellY": 6,
+    "Lumin": 100,
+    "SleepSec": 0.125,
+    "WaitSec": 0.05
+  },
+  {
+    "Ref": 15,
+    "CellX": 3,
+    "CellY": 6,
+    "Lumin": 100,
+    "SleepSec": 0.125,
+    "WaitSec": 0.05
+  },
+  {
+    "Ref": 0,
+    "CellX": 4,
+    "CellY": 6,
+    "Lumin": 100,
+    "SleepSec": 0.125,
+    "WaitSec": 0.05
+  }
+]

@@ -15,15 +15,11 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <PostBuildEvent>if exist '$(ProjectDir)led_positions.json' xcopy '$(ProjectDir)led_positions.json $(TargetDir) /Y'</PostBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <PostBuildEvent>if exist '$(ProjectDir)led_sequence.json' xcopy '$(ProjectDir)led_positions.json $(TargetDir) /Y'</PostBuildEvent>
+     <PostBuildEvent>if exist '$(ProjectDir)led_sequence.json' xcopy '$(ProjectDir)led_positions.json $(TargetDir) /Y'</PostBuildEvent>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <PostBuildEvent>if exist '$(ProjectDir)led_positions.json' xcopy '$(ProjectDir)led_positions.json $(TargetDir) /Y'</PostBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <PostBuildEvent>if exist '$(ProjectDir)led_sequence.json' xcopy '$(ProjectDir)led_positions.json $(TargetDir) /Y'</PostBuildEvent>
   </PropertyGroup>
 
