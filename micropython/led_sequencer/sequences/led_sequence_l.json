@@ -5,7 +5,7 @@
     "CellY": 0,
     "Lumin": 100,
     "SleepSec": 0.125,
-    "WaitSec": 0.05
+    "WaitSec": 0.04
   },
   {
     "Ref": 7,
@@ -13,7 +13,7 @@
     "CellY": 0,
     "Lumin": 100,
     "SleepSec": 0.125,
-    "WaitSec": 0.05
+    "WaitSec": 0.04
   },
   {
     "Ref": 6,
@@ -21,7 +21,7 @@
     "CellY": 0,
     "Lumin": 100,
     "SleepSec": 0.125,
-    "WaitSec": 0.05
+    "WaitSec": 0.04
   },
   {
     "Ref": 5,
@@ -29,7 +29,7 @@
     "CellY": 1,
     "Lumin": 100,
     "SleepSec": 0.125,
-    "WaitSec": 0.05
+    "WaitSec": 0.04
   },
   {
     "Ref": 4,
@@ -37,7 +37,7 @@
     "CellY": 2,
     "Lumin": 100,
     "SleepSec": 0.125,
-    "WaitSec": 0.05
+    "WaitSec": 0.04
   },
   {
     "Ref": 3,
@@ -45,6 +45,14 @@
     "CellY": 3,
     "Lumin": 100,
     "SleepSec": 0.125,
-    "WaitSec": 0.05
+    "WaitSec": 0.04
+  },
+  {
+    "Ref": 2,
+    "CellX": 6,
+    "CellY": 4,
+    "Lumin": 100,
+    "SleepSec": 0.125,
+    "WaitSec": 0.04
   }
 ]

@@ -47,7 +47,8 @@ async def main():
 
     #await run_sequence(pca, "led_sequence_m.json")
 
-    for i in range(5):
+    i = 0
+    while True:
         a = autosequencer("sequences/")
         files = a.generateSequence()
 
@@ -56,6 +57,7 @@ async def main():
             await run_sequence(pca, file)
         print(f"finished sequence {i}")
         await asyncio.sleep(2)
+        i += 1
 
 if __name__ == "__main__":
     # Create and run the event loop

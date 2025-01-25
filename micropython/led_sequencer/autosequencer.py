@@ -36,10 +36,10 @@ class autosequencer:
         for f in self.fnames:
             if f[0] == filetuple[1]:
                 possibilities.append(f)
-            if f[0]+1 == filetuple[1]:
-                possibilities.append(f)
-            if f[0]-1 == filetuple[1]:
-                possibilities.append(f)
+            #if f[0]+1 == filetuple[1]:
+            #    possibilities.append(f)
+            #if f[0]-1 == filetuple[1]:
+            #    possibilities.append(f)
         return possibilities
     
     # generate a sequence of files to play based on RTC seconds
