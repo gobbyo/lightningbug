@@ -22,8 +22,8 @@ namespace LEDGrid
         public MainWindow()
         {
             InitializeComponent();
-            this.Width = 800;
-            this.Height = 600;
+            this.Width = SystemParameters.PrimaryScreenWidth;
+            this.Height = SystemParameters.PrimaryScreenHeight;
 
             this.MouseDown += Window_MouseDown;
             this.KeyDown += Window_KeyDown;
@@ -54,6 +54,11 @@ namespace LEDGrid
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             gridDisplay.PaintGrid();
+        }
+
+        private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            gridDisplay.PaintGrid(); // Repaint the grid when the window size changes
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
