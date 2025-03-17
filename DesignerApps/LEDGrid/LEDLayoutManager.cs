@@ -27,6 +27,28 @@ namespace LEDGrid
             rectangleWidth = rectWidth;
             rectangleHeight = rectHeight;
             gridDisplay = display;
+            //UpdateGridSize(64, 64); // Set grid to 64 by 64 cells
+        }
+
+        public void UpdateGridSize(int width, int height)
+        {
+            rectangleWidth = width;
+            rectangleHeight = height;
+
+            // Clear and repaint all rectangles with updated sizes
+            var gridLines = mainCanvas.Children.OfType<Line>().Where(line => line.Stroke == Brushes.DarkGray).ToList();
+            mainCanvas.Children.Clear();
+            foreach (var line in gridLines)
+            {
+                mainCanvas.Children.Add(line);
+            }
+            foreach (var pos in LEDPositions)
+            {
+                PaintLED(pos.CellX * rectangleWidth, pos.CellY * rectangleHeight, pos.CellX, pos.CellY, pos.Ref);
+            }
+
+            // Update the grid size
+            gridDisplay.UpdateGridSize(rectangleWidth, rectangleHeight);
         }
 
         public void AddLabeledLED(int cellX, int cellY, int posX, int posY)

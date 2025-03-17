@@ -47,7 +47,7 @@ namespace LEDGrid
             }
 
             gridDisplay = new GridDisplay(MainCanvas, rectangleWidth, rectangleHeight);
-            LEDLayoutManager = new LEDLayoutManager(MainCanvas, rectangleWidth, rectangleHeight, gridDisplay);
+            LEDLayoutManager = new LEDLayoutManager(MainCanvas, 30, 34, gridDisplay); // Initialize with 64 by 64 cells
             LEDLayoutManager.LoadLEDPositions();
         }
 
