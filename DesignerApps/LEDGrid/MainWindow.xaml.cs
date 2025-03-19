@@ -30,6 +30,7 @@ namespace LEDGrid
             this.KeyUp += Window_KeyUp;
             this.Closing += MainWindow_Closing;
             this.Loaded += MainWindow_Loaded;
+            this.MouseWheel += Window_MouseWheel; // Add MouseWheel event handler
 
             int rectangleWidth = DefaultLEDWidth;
             int rectangleHeight = DefaultLEDHeight;
@@ -46,9 +47,12 @@ namespace LEDGrid
                 }
             }
 
-            gridDisplay = new GridDisplay(MainCanvas, rectangleWidth, rectangleHeight);
-            LEDLayoutManager = new LEDLayoutManager(MainCanvas, 30, 34, gridDisplay); // Initialize with 64 by 64 cells
-            LEDLayoutManager.LoadLEDPositions();
+            if (MainCanvas != null)
+            {
+                gridDisplay = new GridDisplay(MainCanvas, rectangleWidth, rectangleHeight);
+                LEDLayoutManager = new LEDLayoutManager(MainCanvas, 24, 24, gridDisplay); // Initialize with 12 by 12 cells
+                LEDLayoutManager.LoadLEDPositions();
+            }
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -63,6 +67,8 @@ namespace LEDGrid
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            if (MainCanvas == null) return;
+
             var position = e.GetPosition(MainCanvas); // Get the position relative to MainCanvas
 
             // Snap the position to the nearest grid cell
@@ -130,6 +136,8 @@ namespace LEDGrid
 
         private void HighlightLED(int posX, int posY)
         {
+            if (MainCanvas == null) return;
+
             var highlightRectangle = new Rectangle
             {
                 Width = LEDLayoutManager.Width,
@@ -214,6 +222,33 @@ namespace LEDGrid
             }
 
             gridDisplay.PaintGrid();
+        }
+
+        private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (MainCanvas == null) return;
+
+            double offsetX = 0;
+            double offsetY = 0;
+
+            if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+            {
+                // Scroll horizontally when Shift key is pressed
+                offsetX = e.Delta > 0 ? -10 : 10;
+            }
+            else
+            {
+                // Scroll vertically by default
+                offsetY = e.Delta > 0 ? -10 : 10;
+            }
+
+            double newOffsetX = MainCanvas.RenderTransform.Value.OffsetX + offsetX;
+            double newOffsetY = MainCanvas.RenderTransform.Value.OffsetY + offsetY;
+
+            var transform = new TranslateTransform(newOffsetX, newOffsetY);
+            MainCanvas.RenderTransform = transform;
+
+            gridDisplay.PaintGrid(newOffsetX, newOffsetY); // Pass the new offsets to PaintGrid
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
