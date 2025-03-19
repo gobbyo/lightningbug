@@ -32,23 +32,28 @@ async def main():
     pca_B = PCA9685(i2c, address=0x41)
     pca_C = PCA9685(i2c, address=0x42)
     pca_D = PCA9685(i2c, address=0x43)
+
+    #pca_A.frequency = pca_B.frequency = pca_C.frequency = 512
     pca_A.frequency = pca_B.frequency = pca_C.frequency = pca_D.frequency = 512
 
-    pca = [pca_A, pca_B, pca_C, pca_D]   
+    #pca = [pca_A, pca_B, pca_C]
+    pca = [pca_A, pca_B, pca_C, pca_D] 
     module = ['a', 'b', 'c', 'd']
     
-    if False: # Set to True to SLOWLY Test all LEDs on all modules
+    while True:
         for i in range(len(pca)):
             for j in range(16):
                 print(f"mod:{module[i]},{j}")
-                asyncio.create_task(fade(pca[i], j, brightness, slow[0])) # Create a task for each LED
-                await asyncio.sleep(2)
-    
-    for i in range(len(pca)):
+                asyncio.create_task(fade(pca[i], j, brightness, med[0])) # Create a task for each LED
+                await asyncio.sleep(med[1])
+
+    if False: # Set to True to SLOWLY Test all LEDs on all modules
         for j in range(16):
-            print(f"mod:{module[i]},{j}")
-            asyncio.create_task(fade(pca[i], j, brightness, med[0])) # Create a task for each LED
-            await asyncio.sleep(med[1])
+            print(f"mod:b,{j}")
+            asyncio.create_task(fade(pca_B, j, brightness, slow[0])) # Create a task for each LED
+            await asyncio.sleep(2)
+    
+
 
 if __name__ == "__main__":
     # Create and run the event loop

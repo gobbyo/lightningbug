@@ -1,0 +1,13 @@
+{
+    "rows": 22,
+    "cols": 23,
+    "cell_width": 8,
+    "cell_height": 3,
+    "header_height": 1,
+    "borderwidth": 1,
+    "relief": "solid",
+    "bg_color": "white",
+    "highlight_color": "light gray",
+    "highlighted_color": "yellow",
+    "led_positions_file": "LED_positions.json"
+}
