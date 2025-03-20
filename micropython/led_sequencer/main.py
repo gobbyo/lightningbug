@@ -14,14 +14,14 @@ async def run_sequence(pca, file_name):
 
         end = len(json_data)
         for i in range(end):
-            print(f"json_data[{i}]={json_data[i]}")
+            #print(f"json_data[{i}]={json_data[i]}")
             ch = json_data[i]['ch']
             m = json_data[i]['m']
             module = ord(m) - ord('a')
             brightness = json_data[i]['lu']
             sleeplen = json_data[i]['s']
             #print(f"fade ch={ch}, brightness={brightness}, sleep={sleeplen}")
-            print(f"fade module={module} ch={ch}, brightness={brightness}, sleep={sleeplen}")
+            #print(f"fade module={module} ch={ch}, brightness={brightness}, sleep={sleeplen}")
             asyncio.create_task(fade(pca[module], ch, brightness, sleeplen)) # Create a task for each LED
             await asyncio.sleep(json_data[i]['w'])
         return True
@@ -45,7 +45,8 @@ async def fade(pca, ch, brightness, sleeplen=0.25, fadevalue=0.01):
 
 # Define the main function to run the event loop
 async def main():
-    i2c = I2C(1, sda=Pin(2), scl=Pin(3))  # Correct I2C pins for RP2040
+    #i2c = I2C(1, sda=Pin(2), scl=Pin(3))  # Correct I2C pins for RP2040
+    i2c = I2C(1, sda=Pin(2), scl=Pin(3))  # Correct I2C pins for wemos S2 mini
     pca_A = PCA9685(i2c, address=0x40)
     pca_B = PCA9685(i2c, address=0x41)
     pca_C = PCA9685(i2c, address=0x42)
@@ -59,10 +60,18 @@ async def main():
     module = ['a', 'b', 'c', 'd']
 
     #await run_sequence(pca, "led_sequence_m.json")
-    file = "LED_sequence.json"
-    print(f"Running sequence {file}")
+
+    i = 0
     while True:
-        await run_sequence(pca, file)
+        a = autosequencer("sequences/")
+        files = a.generateSequence()
+
+        for file in files:
+            print(f"Running sequence {file}")
+            await run_sequence(pca, file)
+        print(f"finished sequence {i}")
+        await asyncio.sleep(2)
+        i += 1
 
 if __name__ == "__main__":
     # Create and run the event loop

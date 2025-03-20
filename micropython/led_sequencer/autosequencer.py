@@ -16,6 +16,7 @@ class autosequencer:
         self.fnames = []
         self.sequence = []
         self.rtc = RTC()
+        self.emergencybreak = 10
         d = os.listdir(filedir)
         for e in d:
             filename = self.dir+e
@@ -45,6 +46,7 @@ class autosequencer:
     # generate a sequence of files to play based on RTC seconds
     # returns a list of filenames to play in sequence
     def generateSequence(self):
+        print("[autosequencer.py(48)] generating sequence")
         prev = ""
         self.sequence.clear()
         # rtc.datetime = [year, month, day, weekday, hours, minutes, seconds, subseconds]
@@ -65,8 +67,14 @@ class autosequencer:
             else:
                 break
         if len(self.sequence) <= 1:
-            time.sleep(1)
-            self.generateSequence()
+            print(f"[autosequencer.py(70)] emergency break={self.emergencybreak}")
+            self.emergencybreak -= 1
+            if self.emergencybreak <= 0:
+                self.emergencybreak = 10
+                if len(self.fnames) > 0:
+                    self.sequence.append(self.fnames[0][2])
+            else:
+                self.generateSequence()
         return self.sequence
 
 def main():
