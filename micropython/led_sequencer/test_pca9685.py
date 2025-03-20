@@ -40,17 +40,16 @@ async def main():
     pca = [pca_A, pca_B, pca_C, pca_D] 
     module = ['a', 'b', 'c', 'd']
     
-    while True:
-        for i in range(len(pca)):
-            for j in range(16):
-                print(f"mod:{module[i]},{j}")
-                asyncio.create_task(fade(pca[i], j, brightness, med[0])) # Create a task for each LED
-                await asyncio.sleep(med[1])
-
-    if False: # Set to True to SLOWLY Test all LEDs on all modules
+    for i in range(len(pca)):
         for j in range(16):
-            print(f"mod:b,{j}")
-            asyncio.create_task(fade(pca_B, j, brightness, slow[0])) # Create a task for each LED
+            print(f"mod:{module[i]},{j}")
+            asyncio.create_task(fade(pca[i], j, brightness, med[0])) # Create a task for each LED
+            await asyncio.sleep(med[1])
+
+    if True: # Set to True to SLOWLY Test all LEDs on all modules
+        for j in range(16):
+            print(f"mod:c,{j}")
+            asyncio.create_task(fade(pca_C, j, brightness, slow[0])) # Create a task for each LED
             await asyncio.sleep(2)
     
 

@@ -10,7 +10,7 @@
     "highlight_color": "light gray",
     "highlighted_color": "yellow",
     "led_positions_file": "LED_positions.json",
-    "default_lumin": 30,
-    "default_sleepsec": 0.25,
-    "default_waitsec": 0.125
+    "default_lumin": 30.0,
+    "default_sleepsec": 0.125,
+    "default_waitsec": 0.05
 }

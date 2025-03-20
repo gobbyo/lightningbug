@@ -1,35 +1,11 @@
 import asyncio
+
 from machine import Pin, I2C
 from micropython_pca9685 import PCA9685
-from autosequencer import autosequencer
 from time import sleep
-import ujson
-import uio
-
-async def run_sequence(pca, file_name):
-    json_data = "{}"
-    with uio.open("sequences/" + file_name, "r") as f:
-        json_data = ujson.load(f)
-        f.close()
-
-        end = len(json_data)
-        for i in range(end):
-            print(f"json_data[{i}]={json_data[i]}")
-            ch = json_data[i]['ch']
-            m = json_data[i]['m']
-            module = ord(m) - ord('a')
-            brightness = json_data[i]['lu']
-            sleeplen = json_data[i]['s']
-            #print(f"fade ch={ch}, brightness={brightness}, sleep={sleeplen}")
-            print(f"fade module={module} ch={ch}, brightness={brightness}, sleep={sleeplen}")
-            asyncio.create_task(fade(pca[module], ch, brightness, sleeplen)) # Create a task for each LED
-            await asyncio.sleep(json_data[i]['w'])
-        return True
-    return False
 
 def percentage_to_duty_cycle(percentage):
     return int((percentage / 100) * 0xFFFF)
-
 async def fade(pca, ch, brightness, sleeplen=0.25, fadevalue=0.01):
     iter = (int)(sleeplen/fadevalue)
     dimval = brightness/iter
@@ -45,6 +21,13 @@ async def fade(pca, ch, brightness, sleeplen=0.25, fadevalue=0.01):
 
 # Define the main function to run the event loop
 async def main():
+    slow = [1, 1]
+    walk = [0.5, 0.25]
+    med = [0.19, 0.1]
+    fast = [0.14, 0.07]
+    veryfast = [0.125, 0.05]
+    brightness = 30 #percent
+    
     i2c = I2C(1, sda=Pin(2), scl=Pin(3))  # Correct I2C pins for RP2040
     pca_A = PCA9685(i2c, address=0x40)
     pca_B = PCA9685(i2c, address=0x41)
@@ -57,12 +40,21 @@ async def main():
     #pca = [pca_A, pca_B, pca_C]
     pca = [pca_A, pca_B, pca_C, pca_D] 
     module = ['a', 'b', 'c', 'd']
-
-    #await run_sequence(pca, "led_sequence_m.json")
-    file = "LED_sequence.json"
-    print(f"Running sequence {file}")
+    
     while True:
-        await run_sequence(pca, file)
+        for i in range(len(pca)):
+            for j in range(16):
+                print(f"mod:{module[i]},{j}")
+                asyncio.create_task(fade(pca[i], j, brightness, med[0])) # Create a task for each LED
+                await asyncio.sleep(med[1])
+
+    if False: # Set to True to SLOWLY Test all LEDs on all modules
+        for j in range(16):
+            print(f"mod:b,{j}")
+            asyncio.create_task(fade(pca_B, j, brightness, slow[0])) # Create a task for each LED
+            await asyncio.sleep(2)
+    
+
 
 if __name__ == "__main__":
     # Create and run the event loop

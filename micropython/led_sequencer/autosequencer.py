@@ -23,7 +23,7 @@ class autosequencer:
                 json_data = ujson.load(f)
                 f.close()
                 end = len(json_data)
-                self.fnames.append([json_data[0]['Ref'],json_data[end-1]['Ref'],e])
+                self.fnames.append([json_data[0]['r'],json_data[end-1]['r'],e])
     
     @property
     def files(self):
