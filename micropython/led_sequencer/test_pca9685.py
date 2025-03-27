@@ -20,43 +20,6 @@ async def fade(pca, ch, brightness, sleeplen=0.25, fadevalue=0.01):
 
 # Define the main function to run the event loop
 async def main():
-<<<<<<< HEAD
-    slow = [0.25, 0.125]
-    fast = [0.125, 0.05]
-    veryfast = [0.125, 0.01]
-    brightness = 100 #percent
-    
-    if True:
-        sleeplen = slow[0]
-        waitlen = slow[1]
-    else:
-        sleeplen = fast[0]
-        waitlen = fast[1]
-
-    i2c = I2C(1, sda=Pin(2), scl=Pin(3))  # Correct I2C pins for RP2040
-    pca1 = PCA9685(i2c,address=0x40)
-    pca2 = PCA9685(i2c,address=0x41)
-    pca1.frequency = 512
-    pca2.frequency = 512
-    # Create tasks for fading 3 LEDs concurrently
-    for i in range(2):
-        print(f"LED {i} fade ")
-        asyncio.create_task(fade(pca1, i, brightness, sleeplen)) # Create a task for each LED
-        asyncio.create_task(fade(pca2, i, brightness, sleeplen)) # Create a task for each LED
-        await asyncio.sleep(waitlen)
-    
-    await asyncio.sleep(sleeplen*2)
-
-    for ch in range(2):
-        print(f"LED {ch} heartbeat ")
-        for i in range(3):
-            sleeplen = 1
-            #brightness = int(48/(i+1))
-            asyncio.create_task(fade(pca1, ch, brightness, sleeplen))
-            asyncio.create_task(fade(pca2, ch, brightness, sleeplen))
-            await asyncio.sleep(sleeplen*2)
-    await asyncio.sleep(1)
-=======
     slow = [1, 1]
     walk = [0.5, 0.25]
     med = [0.19, 0.1]
@@ -90,7 +53,6 @@ async def main():
             await asyncio.sleep(2)
     
 
->>>>>>> 1c2acedd56e36ec48f7546d43656a635558fff7c
 
 if __name__ == "__main__":
     # Create and run the event loop

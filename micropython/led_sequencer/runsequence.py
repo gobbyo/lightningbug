@@ -45,21 +45,17 @@ async def fade(pca, ch, brightness, sleeplen=0.25, fadevalue=0.01):
 
 # Define the main function to run the event loop
 async def main():
-    #i2c = I2C(1, sda=Pin(2), scl=Pin(3))  # Correct I2C pins for RP2040
-    i2c = I2C(1, sda=Pin(2), scl=Pin(3))  # Correct I2C pins for wemos S2 mini
+    pcaswitch = Pin(15,Pin.OUT)  # Set the pin to control the PCA9685 modules
+    pcaswitch.off()  # Turn on the PCA9685 modules (PNP)
+    i2c = I2C(1, sda=Pin(2), scl=Pin(3))  # Correct I2C pins for rp2040 and wemos S2 mini
     pca_A = PCA9685(i2c, address=0x40)
     pca_B = PCA9685(i2c, address=0x41)
     pca_C = PCA9685(i2c, address=0x42)
     pca_D = PCA9685(i2c, address=0x43)
 
-    #pca_A.frequency = pca_B.frequency = pca_C.frequency = 512
     pca_A.frequency = pca_B.frequency = pca_C.frequency = pca_D.frequency = 512
 
-    #pca = [pca_A, pca_B, pca_C]
     pca = [pca_A, pca_B, pca_C, pca_D] 
-    module = ['a', 'b', 'c', 'd']
-
-    #await run_sequence(pca, "led_sequence_m.json")
 
     def custom_shuffle(lst):
         for i in range(len(lst) - 1, 0, -1):
@@ -78,11 +74,16 @@ async def main():
 
         for file in files:
             print(f"Running sequence {file}")
+            pcaswitch.off() #PNP
             await run_sequence(pca, file)
+            await asyncio.sleep(2)  # Allow the sequence time to finish
+            pcaswitch.on() #PNP
             await asyncio.sleep(random.randrange(1, 10))  # Allow the sequence time to finish
         print(f"finished sequence {i}")
         i += 1
+        pcaswitch.on() # Turn off the PCA9685 modules (PNP)
         deepsleep(1000 * random.randrange(15, 60))
+        pcaswitch.off() # Turn on the PCA9685 modules (PNP)
 
 if __name__ == "__main__":
     # Create and run the event loop
