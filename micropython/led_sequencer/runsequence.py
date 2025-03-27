@@ -1,8 +1,8 @@
 import asyncio
-from machine import Pin, I2C
+from machine import Pin, I2C, deepsleep
 from micropython_pca9685 import PCA9685
-from autosequencer import autosequencer
-from time import sleep
+import random
+import os
 import ujson
 import uio
 
@@ -61,17 +61,28 @@ async def main():
 
     #await run_sequence(pca, "led_sequence_m.json")
 
+    def custom_shuffle(lst):
+        for i in range(len(lst) - 1, 0, -1):
+            j = random.randint(0, i)
+            lst[i], lst[j] = lst[j], lst[i]
+
     i = 0
     while True:
-        a = autosequencer("sequences/")
-        files = a.generateSequence()
+        dir = "sequences/"
+        d = os.listdir(dir)
+        files = []
+        for e in d:
+            files.append(e)
+
+        custom_shuffle(files)  # Use the custom shuffle function
 
         for file in files:
             print(f"Running sequence {file}")
             await run_sequence(pca, file)
+            await asyncio.sleep(random.randrange(1, 10))  # Allow the sequence time to finish
         print(f"finished sequence {i}")
-        await asyncio.sleep(2)
         i += 1
+        deepsleep(1000 * random.randrange(15, 60))
 
 if __name__ == "__main__":
     # Create and run the event loop
