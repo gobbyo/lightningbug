@@ -7,10 +7,12 @@
     "python.terminal.activateEnvironment": false,
     "micropico.openOnStart": true,
     "python.analysis.typeshedPaths": [
-        "~/.micropico-stubs/included"
+        "~/.micropico-stubs/micropython-esp32-stubs==1.23.0a87"
     ],
     "python.analysis.extraPaths": [
-        "~/.micropico-stubs/included"
+        "~/.micropico-stubs/micropython-esp32-stubs==1.23.0a87"
     ],
-    "micropico.syncFolder": "prototypes"
+    "micropico.syncFolder": "prototypes",
+    "micropico.autoConnect": true,
+    "micropico.manualComDevice": "COM3"
 }
