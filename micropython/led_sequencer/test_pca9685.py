@@ -1,10 +1,35 @@
 import asyncio
 from machine import Pin, I2C
 from micropython_pca9685 import PCA9685
-from time import sleep
+import ujson
+import uio
+
+async def run_sequence(pca, file_name):
+    json_data = "{}"
+    with uio.open("sequences/" + file_name, "r") as f:
+        json_data = ujson.load(f)
+        f.close()
+
+        end = len(json_data)
+        for i in range(end):
+            #print(f"json_data[{i}]={json_data[i]}")
+            ch = json_data[i]['ch']
+            m = json_data[i]['m']
+            module = ord(m) - ord('a')
+            brightness = json_data[i]['lu']
+            sleeplen = json_data[i]['s']
+            #print(f"fade ch={ch}, brightness={brightness}, sleep={sleeplen}")
+            #print(f"fade module={module} ch={ch}, brightness={brightness}, sleep={sleeplen}")
+            #asyncio.create_task(fade(pca[module], ch, brightness, sleeplen)) # Create a task for each LED
+            print(f"pca[module]={pca[module]} ch={ch}, brightness={brightness}, sleep={sleeplen}")
+            pca[module].channels[ch].duty_cycle = percentage_to_duty_cycle(brightness)
+            await asyncio.sleep(json_data[i]['w'])
+        return True
+    return False
 
 def percentage_to_duty_cycle(percentage):
     return int((percentage / 100) * 0xFFFF)
+
 async def fade(pca, ch, brightness, sleeplen=0.25, fadevalue=0.01):
     iter = (int)(sleeplen/fadevalue)
     dimval = brightness/iter
@@ -15,7 +40,7 @@ async def fade(pca, ch, brightness, sleeplen=0.25, fadevalue=0.01):
     for i in range(iter):
         pca.channels[ch].duty_cycle = percentage_to_duty_cycle(brightness - ((i+1)*dimval))
         await asyncio.sleep(fadevalue)
-    #print(f"LED {ch} brightness at {brightness - (int)((i+1)*dimval)}%")
+    print(f"LED {ch} brightness at {brightness - (int)((i+1)*dimval)}%")
     pca.channels[ch].duty_cycle = percentage_to_duty_cycle(0)
 
 # Define the main function to run the event loop
@@ -40,19 +65,21 @@ async def main():
     pca = [pca_A, pca_B, pca_C, pca_D] 
     module = ['a', 'b', 'c', 'd']
     
-    for i in range(len(pca)):
-        for j in range(16):
-            print(f"mod:{module[i]},{j}")
-            asyncio.create_task(fade(pca[i], j, brightness, med[0])) # Create a task for each LED
-            await asyncio.sleep(med[1])
+    if True:
+        await run_sequence(pca, "LED_sequence.json") # Run the sequence from the JSON file
+    
+    if False: # Set to True to Test all LEDs on all modules
+        for i in range(len(pca)):
+            for j in range(16):
+                print(f"mod:{module[i]},{j}")
+                asyncio.create_task(fade(pca[i], j, brightness, med[0])) # Create a task for each LED
+                await asyncio.sleep(med[1])
 
-    if True: # Set to True to SLOWLY Test all LEDs on all modules
+    if False: # Set to True to SLOWLY Test all LEDs on all modules
         for j in range(16):
             print(f"mod:c,{j}")
             asyncio.create_task(fade(pca_C, j, brightness, slow[0])) # Create a task for each LED
             await asyncio.sleep(2)
-    
-
 
 if __name__ == "__main__":
     # Create and run the event loop
