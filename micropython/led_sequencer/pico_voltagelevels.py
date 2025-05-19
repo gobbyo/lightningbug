@@ -29,7 +29,7 @@ def read_3v3_voltage():
     return reading
 
 def record_sample(m):
-    v = read_3v3_voltage()
+    v = read_vbus_voltage()
     with uio.open("voltages.txt", "a") as f:
         f.write("{0}: {1:.2f}V\n".format(m, v))
         f.close()

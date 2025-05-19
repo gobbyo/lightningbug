@@ -73,11 +73,6 @@ def record_sample(voltage):
     with uio.open("voltages.txt", "a") as f:
         f.write("{0}: {1:.2f}V\n".format(utime.time(), voltage))
         f.close()
-
-# Define the main function to run the event loop
-async def main():
-    led = neopixel.NeoPixel(machine.Pin(16), 1)
-    light = photoresistor(26)  # Initialize the photoresistor on pin 13
     pcaswitch = Pin(15,Pin.OUT)  # Set the pin to control the PCA9685 modules
     print("PCA9685 modules are off")
     pcaswitch.off()  # Turn on the PCA9685 modules (PNP)
