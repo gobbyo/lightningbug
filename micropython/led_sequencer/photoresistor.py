@@ -11,6 +11,7 @@ class photoresistor():
     def read(self):
         range = self.max - self.min
         k = self.photoRes.read_u16()
+        #print("Raw ADC value: {0}".format(k))
         k = k - self.min
         if k <= 0:
             k = 1
@@ -23,8 +24,8 @@ class photoresistor():
 
 #Example usage:
 def main():
-    light = photoresistor(26)
-    while True:
+    light = photoresistor(29)
+    for i in range(10):
         # Read the value from the photoresistor
         print("Light level: {0}".format(light.read()))
         time.sleep(1)

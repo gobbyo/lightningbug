@@ -3,6 +3,7 @@ from machine import Pin, I2C
 from micropython_pca9685 import PCA9685
 import ujson
 import uio
+import os
 
 async def run_sequence(pca, file_name):
     json_data = "{}"
@@ -20,7 +21,7 @@ async def run_sequence(pca, file_name):
             sleeplen = json_data[i]['s']
             #print(f"fade ch={ch}, brightness={brightness}, sleep={sleeplen}")
             #print(f"fade module={module} ch={ch}, brightness={brightness}, sleep={sleeplen}")
-            #asyncio.create_task(fade(pca[module], ch, brightness, sleeplen)) # Create a task for each LED
+            asyncio.create_task(fade(pca[module], ch, brightness, sleeplen)) # Create a task for each LED
             print(f"pca[module]={pca[module]} ch={ch}, brightness={brightness}, sleep={sleeplen}")
             pca[module].channels[ch].duty_cycle = percentage_to_duty_cycle(brightness)
             await asyncio.sleep(json_data[i]['w'])
@@ -58,6 +59,7 @@ async def main():
     pca_C = PCA9685(i2c, address=0x42)
     pca_D = PCA9685(i2c, address=0x43)
 
+
     #pca_A.frequency = pca_B.frequency = pca_C.frequency = 512
     pca_A.frequency = pca_B.frequency = pca_C.frequency = pca_D.frequency = 512
 
@@ -66,7 +68,11 @@ async def main():
     module = ['a', 'b', 'c', 'd']
     
     if True:
-        await run_sequence(pca, "LED_sequence.json") # Run the sequence from the JSON file
+        dir = "sequences/"
+        files = os.listdir(dir)
+        for f in files:
+            print(f"Running sequence from file: {f}")
+            await run_sequence(pca, f) # Run the sequence from the JSON file
     
     if False: # Set to True to Test all LEDs on all modules
         for i in range(len(pca)):
@@ -78,7 +84,7 @@ async def main():
     if False: # Set to True to SLOWLY Test all LEDs on all modules
         for j in range(16):
             print(f"mod:c,{j}")
-            asyncio.create_task(fade(pca_C, j, brightness, slow[0])) # Create a task for each LED
+            asyncio.create_task(fade(pca[i], j, brightness, slow[0])) # Create a task for each LED
             await asyncio.sleep(2)
 
 if __name__ == "__main__":

@@ -46,6 +46,15 @@ async def fade(pca, ch, brightness, sleeplen=0.25, fadevalue=0.01):
     #print(f"LED {ch} brightness at {brightness - (int)((i+1)*dimval)}%")
     pca.channels[ch].duty_cycle = percentage_to_duty_cycle(0)
 
+def read_vsys_voltage():
+    adc = machine.ADC(3)  # VSYS is connected to ADC3
+    conversion_factor = 1.62 / (65535)
+    
+    reading = adc.read_u16() * conversion_factor
+    # The voltage divider on the Pico board scales the VSYS voltage by a factor of 3
+    supply_voltage = reading * 3
+    return supply_voltage
+
 def read_3v3_voltage():
     adc = machine.ADC(28)  # 3V3 is connected to ADC28
     conversion_factor = 3.3 / (65535)
@@ -57,15 +66,25 @@ def voltage_status(led, voltage):
     record_sample(voltage)  # Record the voltage sample
     print(f"Voltage: {voltage:.2f}V")
     v = round(voltage * 100,0)
+    green = (0, 255, 0)
     yellow = (200, 90, 0)
     red = (255, 0, 0)
-    if v < 290:
-        led[0] = red
-        led.write()
-    elif v < 310:
-        led[0] = yellow
-        led.write()
-    else:
+
+    for i in range(3):
+        utime.sleep(0.5)  # Sleep for 0.5 seconds
+        if v < 290:
+            led[0] = red
+            led.write()
+        elif v < 310:
+            led[0] = yellow
+            led.write()
+        elif v >= 310:
+            led[0] = green
+            led.write()
+        else:
+            led[0] = (0, 0, 0)
+            led.write()
+        utime.sleep(0.5)  # Sleep for 0.5 seconds
         led[0] = (0, 0, 0)
         led.write()
 
@@ -73,22 +92,30 @@ def record_sample(voltage):
     with uio.open("voltages.txt", "a") as f:
         f.write("{0}: {1:.2f}V\n".format(utime.time(), voltage))
         f.close()
-    pcaswitch = Pin(15,Pin.OUT)  # Set the pin to control the PCA9685 modules
-    print("PCA9685 modules are off")
+
+# Define the main function to run the event loop
+async def main():
+    led = neopixel.NeoPixel(machine.Pin(16), 1)
+    voltage_status(led, read_vsys_voltage())  # Check the voltage level and set the LED color accordingly
+    light = photoresistor(29)  # Initialize the photoresistor on pin 13
+    pcaswitch = Pin(28,Pin.OUT)  # Set the pin to control the PCA9685 modules
+    
+    i2c = I2C(1, sda=Pin(2), scl=Pin(3))  # Correct I2C pins for rp2040 and wemos S2 mini
     pcaswitch.off()  # Turn on the PCA9685 modules (PNP)
     print("PCA9685 modules are on")
-    i2c = I2C(1, sda=Pin(2), scl=Pin(3))  # Correct I2C pins for rp2040 and wemos S2 mini
+    utime.sleep(2)
     pca_A = PCA9685(i2c, address=0x40)
     pca_B = PCA9685(i2c, address=0x41)
     pca_C = PCA9685(i2c, address=0x42)
     pca_D = PCA9685(i2c, address=0x43)
 
     pca_A.frequency = pca_B.frequency = pca_C.frequency = pca_D.frequency = 512
-
     pca = [pca_A, pca_B, pca_C, pca_D] 
 
-    pcaswitch.on()
-
+    utime.sleep(2)
+    pcaswitch.on() #PNP, turn off the PCA9685 modules
+    #print("PCA9685 modules are off")
+    
     def custom_shuffle(lst):
         for i in range(len(lst) - 1, 0, -1):
             j = random.randint(0, i)
@@ -105,20 +132,23 @@ def record_sample(voltage):
             #print("Light level is low, running sequences")
             #voltage_status(led, read_3v3_voltage())  # Check the voltage level and set the LED color accordingly
             custom_shuffle(files)  # Use the custom shuffle function
+            pcaswitch.off()  # Turn on the PCA9685 modules (PNP)
+            #print("PCA9685 modules are on")
+            utime.sleep(2)
 
             for file in files:
                 #print(f"Running sequence {file}")
-                pcaswitch.off() #PNP, turn on the PCA9685 modules
                 await run_sequence(pca, file)
                 await asyncio.sleep(random.randrange(1, 5))  # Allow the sequence time to finish
-                pcaswitch.on() #PNP, turn off the PCA9685 modules
-                
-            #asyncio.sleep(1000 * random.randrange(5, 30))
+
+            pcaswitch.on() #PNP, turn off the PCA9685 modules
+            #print("PCA9685 modules are off")
+            #utime.sleep(random.randrange(5, 30))
             deepsleep(1000 * random.randrange(5, 30))
             # Sleep for a random time between 5 and 30 seconds between sequences
         else:
             #print("Light level is high, sleeping")
-            #await asyncio.sleep(5)
+            #utime.sleep(30)
             deepsleep(30 * 1000) # sleep before sampling for sunlight level
 
 if __name__ == "__main__":
