@@ -16,6 +16,10 @@ async def run_sequence(pca, file_name):
         f.close()
 
         end = len(json_data)
+        # Keep track of the last channel and module
+        last_ch = None
+        last_module = None
+        
         for i in range(end):
             #print(f"json_data[{i}]={json_data[i]}")
             ch = json_data[i]['ch']
@@ -23,9 +27,21 @@ async def run_sequence(pca, file_name):
             module = ord(m) - ord('a')
             brightness = json_data[i]['lu']
             sleeplen = json_data[i]['s']
-            #print(f"fade ch={ch}, brightness={brightness}, sleep={sleeplen}")
-            #print(f"fade module={module} ch={ch}, brightness={brightness}, sleep={sleeplen}")
-            asyncio.create_task(fade(pca[module], ch, brightness, sleeplen)) # Create a task for each LED
+            
+            # Skip creating a fade task if this is the same channel and module as the last one
+            if last_ch != ch or last_module != module:
+                print(f"fade module={module} ch={ch}, brightness={brightness}, sleep={sleeplen}")
+                asyncio.create_task(fade(pca[module], ch, brightness, sleeplen)) # Create a task for each LED
+            else:
+                print(f"fade module={module} ch={ch}, brightness={brightness}, sleep={sleeplen}")
+                pca[module].channels[ch].duty_cycle = percentage_to_duty_cycle(brightness)
+                #pca.channels[ch].duty_cycle = percentage_to_duty_cycle(brightness)
+                await asyncio.sleep(sleeplen)
+                
+            # Update the last channel and module
+            last_ch = ch
+            last_module = module
+            
             await asyncio.sleep(json_data[i]['w'])
         return True
     return False
