@@ -126,6 +126,7 @@ async def main():
                 channel.duty_cycle = 0
 
         iterEnd = random.randrange(MINIMUM_SEQUENCE_RUN, len(files) + 1)  # Randomly choose how many sequences to run
+        print(f"Running {iterEnd} sequences out of {len(files)} available sequences")
         for i in range(iterEnd):
             print(f"Running sequence {files[i]}")
             await run_sequence(pca, files[i])
