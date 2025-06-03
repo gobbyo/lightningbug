@@ -9,7 +9,10 @@ import ujson
 import uio
 import utime
 
-MINIMUM_SEQUENCE_RUN = 3  # Minimum number of sequences to run
+MINIMUM_SEQUENCE_RUN = 1  # Minimum number of sequences to run
+MIN_SLEEP_TIME_BETWEEN_RUNS = 5  # Minimum sleep time in seconds
+MAX_SLEEP_TIME_BETWEEN_RUNS = 30  # Maximum sleep time in seconds
+LIGHT_DETECTION_SLEEP = 30  # Sleep time in seconds for light detection
 PWM_FREQUENCY = 512  # PWM frequency for PCA9685
 PHOTORESISTOR_PIN = 29  # Pin for the photoresistor
 PCA_SWITCH_PIN = 28  # Pin to control the PCA9685 modules
@@ -91,25 +94,16 @@ def show_startup_blink():
         led.write()  # Turn off the LED
 
 # Define the main function to run the event loop
-async def main():
-    light = photoresistor(PHOTORESISTOR_PIN)  # Initialize the photoresistor on the defined pin
-    pcaswitch = Pin(PCA_SWITCH_PIN,Pin.OUT)  # Set the pin to control the PCA9685 modules
-    
-    dir = "sequences/"
-    d = os.listdir(dir)
-    files = []
-    for e in d:
-        files.append(e)
-
-    print("Checking light level...")
+async def main(light, pcaswitch, files):
+    #print("Checking light level...")
     if light.read() < 2: # Check if the light level is below a certain threshold
-        print("Light level is low, running sequences")
+        #print("Light level is low, running sequences")
         #voltage_status(led, read_3v3_voltage())  # Check the voltage level and set the LED color accordingly
         custom_shuffle(files)  # Use the custom shuffle function
 
         i2c = I2C(1, sda=Pin(SDA_PIN), scl=Pin(SCL_PIN))  # Correct I2C pins for rp2040 and wemos S2 mini
         pcaswitch.off()  # Turn on the PCA9685 modules (PNP)
-        print("PCA9685 modules are on")
+        #print("PCA9685 modules are on")
         utime.sleep(PCA_MODULE_WARMUP_TIME) # Allow time for the PCA9685 modules to initialize
 
         pca_A = PCA9685(i2c, address=0x40)
@@ -125,11 +119,12 @@ async def main():
             for channel in pca_instance.channels:
                 channel.duty_cycle = 0
 
-        iterEnd = random.randrange(MINIMUM_SEQUENCE_RUN, len(files) + 1)  # Randomly choose how many sequences to run
+        iterEnd = random.randint(MINIMUM_SEQUENCE_RUN, len(files))  # Randomly choose how many sequences to run
+        #print(f"Running {iterEnd} sequences out of {len(files)} available sequences")
         for i in range(iterEnd):
-            print(f"Running sequence {files[i]}")
+            #print(f"Running sequence {files[i]}")
             await run_sequence(pca, files[i])
-            await asyncio.sleep(random.randrange(1, 5))  # Allow the sequence time to finish
+            await asyncio.sleep(random.randint(1, 5))  # Allow the sequence time to finish
         # Uncomment the following lines if you want to run all sequences in the directory
         #for file in files:
             #print(f"Running sequence {file}")
@@ -137,17 +132,28 @@ async def main():
         #    await asyncio.sleep(random.randrange(1, 5))  # Allow the sequence time to finish
         
         pcaswitch.on() #PNP, turn off the PCA9685 modules
-        print("PCA9685 modules are off")
-        utime.sleep(random.randrange(5, 30))
-        deepsleep(1000 * random.randrange(5, 30))
+        #print("PCA9685 modules are off")
+        #utime.sleep(random.randrange(MIN_SLEEP_TIME_BETWEEN_RUNS, MAX_SLEEP_TIME_BETWEEN_RUNS))
+        deepsleep(1000 * random.randrange(MIN_SLEEP_TIME_BETWEEN_RUNS, MAX_SLEEP_TIME_BETWEEN_RUNS))
         # Sleep for a random time between 5 and 30 seconds between sequences
     else:
+        pcaswitch.on() #PNP, turn off the PCA9685 modules
         #print("Light level is high, sleeping")
-        #utime.sleep(30)
-        deepsleep(30 * 1000) # sleep before sampling for sunlight level
+        #utime.sleep(LIGHT_DETECTION_SLEEP)
+        deepsleep(LIGHT_DETECTION_SLEEP * 1000) # sleep before sampling for sunlight level
 
 if __name__ == "__main__":
     # Create and run the event loop
+    light = photoresistor(PHOTORESISTOR_PIN)  # Initialize the photoresistor on the defined pin
+    pcaswitch = Pin(PCA_SWITCH_PIN,Pin.OUT)  # Set the pin to control the PCA9685 modules
+    pcaswitch.on() #PNP, turn off the PCA9685 modules
+
+    dir = "sequences/"
+    d = os.listdir(dir)
+    files = []
+    for e in d:
+        files.append(e)
+
     loop = asyncio.get_event_loop()  
-    loop.create_task(main())  # Create a task to run the main function
+    loop.create_task(main(light, pcaswitch, files))  # Create a task to run the main function
     loop.run_forever()  # Run the event loop indefinitely
