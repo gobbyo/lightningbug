@@ -116,10 +116,14 @@ async def main():
             #print("PCA9685 modules are on")
             utime.sleep(1) # Allow time for the PCA9685 modules to initialize
 
-            for file in files:
-                #print(f"Running sequence {file}")
-                await run_sequence(pca, file)
+            for i in range(5):
+                print(f"Running sequence {files[i]}")
+                await run_sequence(pca, files[i])
                 await asyncio.sleep(random.randrange(1, 5))  # Allow the sequence time to finish
+            #for file in files:
+                #print(f"Running sequence {file}")
+            #    await run_sequence(pca, file)
+            #    await asyncio.sleep(random.randrange(1, 5))  # Allow the sequence time to finish
             
             pcaswitch.on() #PNP, turn off the PCA9685 modules
             #print("PCA9685 modules are off")

@@ -97,16 +97,16 @@ async def main():
     if True:
         dir = "sequences/"
         files = os.listdir(dir)
-        filenum = 4 # Change this to the desired sequence file number
-        print(f"Running sequence from file: {files[filenum]}")
-        await run_sequence(pca, files[filenum]) # Run the sequence from the JSON file
-        #for f in files:
-        #    await flashLED(led, green, 0.5)  # Flash the LED green to indicate start
-        #    print(f"Running sequence from file: {f}")
-        #    await run_sequence(pca, f) # Run the sequence from the JSON file
-        #    await flashLED(led, red, 0.5)  # Flash the LED green to indicate stop
-        #    await asyncio.sleep(1)
-    
+        #filenum = 6 # Change this to the desired sequence file number
+        #print(f"Running sequence from file: {files[filenum]}")
+        #await run_sequence(pca, files[filenum]) # Run the sequence from the JSON file
+        for f in files:
+            await flashLED(led, green, 0.5)  # Flash the LED green to indicate start
+            print(f"Running sequence from file: {f}")
+            await run_sequence(pca, f) # Run the sequence from the JSON file
+            await flashLED(led, red, 0.5)  # Flash the LED green to indicate stop
+            await asyncio.sleep(1)
+
     if False: # Set to True to Test all LEDs on all modules
         for i in range(len(pca)):
             for j in range(16):
