@@ -4,6 +4,7 @@ from micropython_pca9685 import PCA9685
 import ujson
 import uio
 import os
+import neopixel
 
 async def run_sequence(pca, file_name):
     json_data = "{}"
@@ -58,8 +59,21 @@ async def fade(pca, ch, brightness, sleeplen=0.25, fadevalue=0.01):
     #print(f"LED {ch} brightness at {brightness - (int)((i+1)*dimval)}%")
     pca.channels[ch].duty_cycle = percentage_to_duty_cycle(0)
 
+async def flashLED(led, color, duration=0.5):
+    led[0] = color
+    led.write()
+    await asyncio.sleep(duration)
+    led[0] = (0, 0, 0)  # Turn off the LED
+    led.write()
+    await asyncio.sleep(duration)
+
 # Define the main function to run the event loop
 async def main():
+    red = (255, 0, 0)
+    green = (0, 255, 0)
+    blue = (0, 0, 255)
+    led = neopixel.NeoPixel(machine.Pin(16), 1)  # Using internal NeoPixel on Pin 16
+
     slow = [1, 1]
     walk = [0.5, 0.25]
     med = [0.19, 0.1]
@@ -73,7 +87,6 @@ async def main():
     pca_C = PCA9685(i2c, address=0x42)
     pca_D = PCA9685(i2c, address=0x43)
 
-
     #pca_A.frequency = pca_B.frequency = pca_C.frequency = 512
     pca_A.frequency = pca_B.frequency = pca_C.frequency = pca_D.frequency = 512
 
@@ -82,14 +95,17 @@ async def main():
     module = ['a', 'b', 'c', 'd']
     
     if True:
-        filenum = 2
         dir = "sequences/"
         files = os.listdir(dir)
+        filenum = 4 # Change this to the desired sequence file number
         print(f"Running sequence from file: {files[filenum]}")
         await run_sequence(pca, files[filenum]) # Run the sequence from the JSON file
         #for f in files:
+        #    await flashLED(led, green, 0.5)  # Flash the LED green to indicate start
         #    print(f"Running sequence from file: {f}")
         #    await run_sequence(pca, f) # Run the sequence from the JSON file
+        #    await flashLED(led, red, 0.5)  # Flash the LED green to indicate stop
+        #    await asyncio.sleep(1)
     
     if False: # Set to True to Test all LEDs on all modules
         for i in range(len(pca)):
