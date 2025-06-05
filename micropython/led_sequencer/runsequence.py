@@ -32,6 +32,8 @@ NEOPIXEL_PIN = 16  # Pin connected to the NeoPixel LED
 RED = (255, 0, 0)  # Color for the NeoPixel LED
 LED_OFF = (0, 0, 0)  # Color to turn off the NeoPixel LED
 
+STATIC_CHOICES = [("a", 2), ("c", 14), ("c", 2), ("d", 2), ("b", 2), ("b", 13)]
+
 def blink_led(blink_pattern):
     led = neopixel.NeoPixel(Pin(NEOPIXEL_PIN), 1)
     for i in range(3):
@@ -47,7 +49,7 @@ def blink_led(blink_pattern):
 # Add this at strategic points in your code where memory might be an issue
 def collect_garbage():
     gc.collect()
-    print(f"Free memory: {gc.mem_free()} bytes")
+    #print(f"Free memory: {gc.mem_free()} bytes")
 
 async def run_sequence(pca, file_name):
     try:
@@ -55,14 +57,31 @@ async def run_sequence(pca, file_name):
             json_data = ujson.load(f)
             
         end = len(json_data)
+        #print(f"Running sequence from file: {file_name}, total entries: {end}")
+
         # Keep track of the last channel and module
         last_ch = None
         last_module = None
+        is_static = False
+
+        if file_name.startswith("static"):
+            is_static = True
         
+        static_substitutions = random.choice(STATIC_CHOICES)
+
         for i in range(end):
+            
             #print(f"json_data[{i}]={json_data[i]}")
-            ch = json_data[i]['ch']
-            m = json_data[i]['m']
+
+            if is_static:
+                #print(f"static_substitutions={static_substitutions}")
+                m = static_substitutions[0]
+                ch = static_substitutions[1]
+            else:
+                m = json_data[i]['m']
+                ch = json_data[i]['ch']
+
+            #print(f"is_static={is_static}, ch={ch}, m={m}")
             module = ord(m) - ord('a')
             brightness = json_data[i]['lu']
             sleeplen = json_data[i]['s']
@@ -84,16 +103,16 @@ async def run_sequence(pca, file_name):
             await asyncio.sleep(json_data[i]['w'])
         return True
     except OSError as e:
-        print(f"Error opening file {file_name}: {e}")
+        #print(f"Error opening file {file_name}: {e}")
         blink_led([SHORT, LONG])
         return False
     except ujson.JSONDecodeError:
         blink_led([SHORT, SHORT, SHORT])
-        print(f"Error parsing JSON in file {file_name}")
+        #print(f"Error parsing JSON in file {file_name}")
         return False
     except Exception as e:
         blink_led([LONG, SHORT, LONG])
-        print(f"Unexpected error: {e}")
+        #print(f"Unexpected error: {e}")
         return False
 
 def percentage_to_duty_cycle(percentage):
@@ -158,7 +177,8 @@ async def main(light, pcaswitch, files):
         finally:
             # Ensure we turn off the modules even if an error occurs
             pcaswitch.on()  # PNP, turn off the PCA9685 modules
-            
+        
+        #utime.sleep(5)  # Allow time for the last sequence to finish
         deepsleep(1000 * random.randrange(MIN_SLEEP_TIME_BETWEEN_RUNS, MAX_SLEEP_TIME_BETWEEN_RUNS))
         # Sleep for a random time between 5 and 30 seconds between sequences
     else:
@@ -193,7 +213,7 @@ if __name__ == "__main__":
         try:
             files = os.listdir(dir)
         except OSError:
-            print(f"Error: '{dir}' directory not found or empty")
+            #print(f"Error: '{dir}' directory not found or empty")
             files = []
        
         if files:
@@ -201,7 +221,7 @@ if __name__ == "__main__":
             loop.create_task(main(light, pcaswitch, files))
             loop.run_forever()
         else:
-            print("No sequence files found. Going to sleep.")
+            #print("No sequence files found. Going to sleep.")
             deepsleep(LIGHT_DETECTION_SLEEP * 1000)
     except Exception as e:
         blink_led([SHORT, SHORT, SHORT, LONG, LONG, LONG, SHORT, SHORT, SHORT])

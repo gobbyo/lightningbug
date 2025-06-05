@@ -5,6 +5,9 @@ import ujson
 import uio
 import os
 import neopixel
+import random
+
+static_choices = [("a", "2"), ("c", "14"), ("c","2"), ("d", "2"), ("b", "2"),("b","13")]
 
 async def run_sequence(pca, file_name):
     json_data = "{}"
@@ -16,11 +19,21 @@ async def run_sequence(pca, file_name):
         # Keep track of the last channel and module
         last_ch = None
         last_module = None
+        is_static = False
+
+        if file_name.startswith("static"):
+            is_static = True
         
+        static_substitutions = random.choice(static_choices)
+
         for i in range(end):
             #print(f"json_data[{i}]={json_data[i]}")
-            ch = json_data[i]['ch']
-            m = json_data[i]['m']
+            if is_static:
+                ch = static_substitutions[0][0]
+                m = static_substitutions[0][1]
+            else:
+                ch = json_data[i]['ch']
+                m = json_data[i]['m']
             module = ord(m) - ord('a')
             brightness = json_data[i]['lu']
             sleeplen = json_data[i]['s']
