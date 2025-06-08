@@ -6,16 +6,37 @@ import uio
 import os
 import neopixel
 import random
+import utime
 
-static_choices = [("a", "2"), ("c", "14"), ("c","2"), ("d", "2"), ("b", "2"),("b","13")]
+SHORT = 0.125
+LONG = 0.5
+BLINK_SLEEP = 0.25
+NEOPIXEL_PIN = 16  # Pin connected to the NeoPixel LED
+RED = (255, 0, 0)  # Color for the NeoPixel LED
+LED_OFF = (0, 0, 0)  # Color to turn off the NeoPixel LED
+
+STATIC_CHOICES = [("a", 2), ("c", 14), ("c", 2), ("d", 2), ("b", 2), ("b", 13)]
+
+def blink_led(blink_pattern):
+    led = neopixel.NeoPixel(Pin(NEOPIXEL_PIN), 1)
+    for i in range(3):
+        for duration in blink_pattern:
+            led[0] = RED  # Set the color of the NeoPixel
+            led.write()
+            utime.sleep(duration)
+            led[0] = LED_OFF  # Set the color of the NeoPixel
+            led.write()  # Turn off the LED
+            utime.sleep(BLINK_SLEEP)  # Sleep for the specified duration
+        utime.sleep(3)
 
 async def run_sequence(pca, file_name):
-    json_data = "{}"
-    with uio.open("sequences/" + file_name, "r") as f:
-        json_data = ujson.load(f)
-        f.close()
-
+    try:
+        with uio.open("sequences/" + file_name, "r") as f:
+            json_data = ujson.load(f)
+            
         end = len(json_data)
+        #print(f"Running sequence from file: {file_name}, total entries: {end}")
+
         # Keep track of the last channel and module
         last_ch = None
         last_module = None
@@ -24,26 +45,31 @@ async def run_sequence(pca, file_name):
         if file_name.startswith("static"):
             is_static = True
         
-        static_substitutions = random.choice(static_choices)
+        static_substitutions = random.choice(STATIC_CHOICES)
 
         for i in range(end):
+            
             #print(f"json_data[{i}]={json_data[i]}")
+
             if is_static:
-                ch = static_substitutions[0][0]
-                m = static_substitutions[0][1]
+                #print(f"static_substitutions={static_substitutions}")
+                m = static_substitutions[0]
+                ch = static_substitutions[1]
             else:
-                ch = json_data[i]['ch']
                 m = json_data[i]['m']
+                ch = json_data[i]['ch']
+
+            #print(f"is_static={is_static}, ch={ch}, m={m}")
             module = ord(m) - ord('a')
             brightness = json_data[i]['lu']
             sleeplen = json_data[i]['s']
             
-            # Skip creating a fade task if this is the same channel and module as the last one
+            # Skip creating a fade task (tail) if this is the same channel and module as the last one
             if last_ch != ch or last_module != module:
-                print(f"fade module={module} ch={ch}, brightness={brightness}, sleep={sleeplen}")
+                #print(f"fade module={module} ch={ch}, brightness={brightness}, sleep={sleeplen}")
                 asyncio.create_task(fade(pca[module], ch, brightness, sleeplen)) # Create a task for each LED
             else:
-                print(f"fade module={module} ch={ch}, brightness={brightness}, sleep={sleeplen}")
+                #print(f"fade module={module} ch={ch}, brightness={brightness}, sleep={sleeplen}")
                 pca[module].channels[ch].duty_cycle = percentage_to_duty_cycle(brightness)
                 #pca.channels[ch].duty_cycle = percentage_to_duty_cycle(brightness)
                 await asyncio.sleep(sleeplen)
@@ -54,7 +80,18 @@ async def run_sequence(pca, file_name):
             
             await asyncio.sleep(json_data[i]['w'])
         return True
-    return False
+    except OSError as e:
+        #print(f"Error opening file {file_name}: {e}")
+        blink_led([SHORT, LONG])
+        return False
+    except ujson.JSONDecodeError:
+        blink_led([SHORT, SHORT, SHORT])
+        #print(f"Error parsing JSON in file {file_name}")
+        return False
+    except Exception as e:
+        blink_led([LONG, SHORT, LONG])
+        #print(f"Unexpected error: {e}")
+        return False
 
 def percentage_to_duty_cycle(percentage):
     return int((percentage / 100) * 0xFFFF)
@@ -110,7 +147,7 @@ async def main():
     if True:
         dir = "sequences/"
         files = os.listdir(dir)
-        #filenum = 6 # Change this to the desired sequence file number
+        #filenum = 1 # Change this to the desired sequence file number
         #print(f"Running sequence from file: {files[filenum]}")
         #await run_sequence(pca, files[filenum]) # Run the sequence from the JSON file
         for f in files:

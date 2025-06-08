@@ -5,8 +5,11 @@ import json
 # control + click on the cell will highlight the corresponding sequence value
 # shift + click on the cell will show editable fields for the cell
 
+SEQUENCE_FILE = "D_LED_sequence.json"  # Default sequence file name
+
 class GridApp:
     def __init__(self, root, config):
+        self.sequence_file = SEQUENCE_FILE
         self.root = root
         self.rows = config['rows']
         self.cols = config['cols']
@@ -35,7 +38,6 @@ class GridApp:
         self.root.bind("<KeyRelease>", self.store_key)  # Bind key releas 
         self.led_positions_file = config['led_positions_file']
         self.load_highlighted_cells()  # Load highlighted cells from JSON file
-        self.sequence_file = "static_longthrob_sequence.json"
         self.default_lumin = 30  # Default luminance
         self.default_sleepsec = 0.25  # Default sleep seconds
         self.default_waitsec = 0.25  # Default wait seconds
