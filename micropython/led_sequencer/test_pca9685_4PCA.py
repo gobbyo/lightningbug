@@ -14,6 +14,7 @@ BLINK_SLEEP = 0.25
 NEOPIXEL_PIN = 16  # Pin connected to the NeoPixel LED
 RED = (255, 0, 0)  # Color for the NeoPixel LED
 LED_OFF = (0, 0, 0)  # Color to turn off the NeoPixel LED
+PCA_SWITCH_PIN = 28  # Pin to control the PCA9685 modules
 
 STATIC_CHOICES = [("a", 2), ("c", 14), ("c", 2), ("d", 2), ("b", 2), ("b", 13)]
 
@@ -129,7 +130,11 @@ async def main():
     med = [0.19, 0.1]
     fast = [0.14, 0.07]
     veryfast = [0.125, 0.05]
-    brightness = 50 #percent
+    brightness = 20 #percent
+
+    pcaswitch = Pin(PCA_SWITCH_PIN, Pin.OUT)
+    pcaswitch.off()  # PNP, turn on the PCA9685 modules
+    await asyncio.sleep(1)  # Wait for the PCA9685 modules to initialize
     
     i2c = I2C(1, sda=Pin(2), scl=Pin(3))  # Correct I2C pins for RP2040
     pca_A = PCA9685(i2c, address=0x40)
@@ -144,7 +149,7 @@ async def main():
     pca = [pca_A, pca_B, pca_C, pca_D] 
     module = ['a', 'b', 'c', 'd']
     
-    if True:
+    if False:
         dir = "sequences/"
         files = os.listdir(dir)
         #filenum = 1 # Change this to the desired sequence file number
@@ -157,7 +162,7 @@ async def main():
             await flashLED(led, red, 0.5)  # Flash the LED green to indicate stop
             await asyncio.sleep(1)
 
-    if False: # Set to True to Test all LEDs on all modules
+    if True: # Set to True to Test all LEDs on all modules
         for i in range(len(pca)):
             for j in range(16):
                 print(f"mod:{module[i]},{j}")
@@ -165,7 +170,7 @@ async def main():
                 await asyncio.sleep(med[1])
 
     if False: # Set to True to SLOWLY Test all LEDs on all modules
-        i = 2
+        i = 0
         for j in range(16):
             print(f"mod:{module[i]},{j}")
             asyncio.create_task(fade(pca[i], j, brightness, slow[0])) # Create a task for each LED
