@@ -10,7 +10,7 @@ time.sleep(1)
 
 i2c = I2C(1, sda=Pin(2), scl=Pin(3))
 devices = i2c.scan()
-time.sleep(5)
+time.sleep(1)
 if not devices:
     print("No I2C devices found. Please check your connections.")
 else:
