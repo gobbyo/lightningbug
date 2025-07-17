@@ -11,8 +11,8 @@ import utime
 import gc
 
 MINIMUM_SEQUENCE_RUN = 1  # Minimum number of sequences to run
-MIN_SLEEP_TIME_BETWEEN_RUNS = 5  # Minimum sleep time in seconds
-MAX_SLEEP_TIME_BETWEEN_RUNS = 30  # Maximum sleep time in seconds
+MIN_SLEEP_TIME_BETWEEN_RUNS = 1  # Minimum sleep time in seconds
+MAX_SLEEP_TIME_BETWEEN_RUNS = 5  # Maximum sleep time in seconds
 LIGHT_DETECTION_SLEEP = 30  # Sleep time in seconds for light detection
 PWM_FREQUENCY = 512  # PWM frequency for PCA9685
 PHOTORESISTOR_PIN = 29  # Pin for the photoresistor

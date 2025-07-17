@@ -149,7 +149,7 @@ async def main():
     pca = [pca_A, pca_B, pca_C, pca_D] 
     module = ['a', 'b', 'c', 'd']
     
-    if True:
+    if False:
         dir = "sequences/"
         files = os.listdir(dir)
         #filenum = 1 # Change this to the desired sequence file number
@@ -162,12 +162,12 @@ async def main():
             await flashLED(led, red, 0.5)  # Flash the LED green to indicate stop
             await asyncio.sleep(1)
 
-    if False: # Set to True to Test all LEDs on all modules
+    if True: # Set to True to Test all LEDs on all modules
         for i in range(len(pca)):
             for j in range(16):
                 print(f"mod:{module[i]},{j}")
-                asyncio.create_task(fade(pca[i], j, brightness, med[0])) # Create a task for each LED
-                await asyncio.sleep(med[1])
+                asyncio.create_task(fade(pca[i], j, brightness, walk[0])) # Create a task for each LED
+                await asyncio.sleep(walk[1])
 
     if False: # Set to True to SLOWLY Test all LEDs on all modules
         for i in range(len(pca)):
