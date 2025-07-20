@@ -14,13 +14,26 @@ MINIMUM_SEQUENCE_RUN = 1  # Minimum number of sequences to run
 MIN_SLEEP_TIME_BETWEEN_RUNS = 1  # Minimum sleep time in seconds
 MAX_SLEEP_TIME_BETWEEN_RUNS = 5  # Maximum sleep time in seconds
 LIGHT_DETECTION_SLEEP = 30  # Sleep time in seconds for light detection
-PWM_FREQUENCY = 512  # PWM frequency for PCA9685
+PWM_FREQUENCY = 2047  # PWM frequency for PCA9685
 PHOTORESISTOR_PIN = 29  # Pin for the photoresistor
 PCA_SWITCH_PIN = 28  # Pin to control the PCA9685 modules
 # PHOTORESISTOR_PIN = 28  # Pin for the photoresistor
 # PCA_SWITCH_PIN = 27  # Pin to control the PCA9685 modules
-SDA_PIN = 2  # SDA pin for I2C
-SCL_PIN = 3  # SCL pin for I2C
+
+# Board configuration - Change this to match your microcontroller
+BOARD_TYPE = "RP2040_ZERO"  # Options: "RP2040_ZERO" or "XIAO_RP2040"
+
+# Set I2C pins based on board type
+if BOARD_TYPE == "XIAO_RP2040":
+    SDA_PIN = 6  # SDA pin for I2C on Xiao RP2040
+    SCL_PIN = 7  # SCL pin for I2C on Xiao RP2040
+    XIAO_POWER_PIN = 11  # Power pin for Xiao RP2040
+    XIAO_LED_PIN = 12  # RGB LED pin for Xiao RP2040
+else:  # Default to RP2040_ZERO
+    SDA_PIN = 2  # SDA pin for I2C on RP2040 Zero
+    SCL_PIN = 3  # SCL pin for I2C on RP2040 Zero
+    NEOPIXEL_PIN = 16  # Pin connected to the NeoPixel LED
+    
 PCA_MODULE_WARMUP_TIME = 1  # Time to wait for PCA9685 modules to warm up
 LIGHT_THRESHOLD = 2
 SEQUENCE_SLEEP_MIN = 1
@@ -28,25 +41,31 @@ SEQUENCE_SLEEP_MAX = 5
 
 # error warning flashes
 SHORT = 0.125
-LONG = 0.5
+LONG = 1
 BLINK_SLEEP = 0.25
-NEOPIXEL_PIN = 16  # Pin connected to the NeoPixel LED
 RED = (255, 0, 0)  # Color for the NeoPixel LED
+GREEN = (0, 255, 0)  # Color for the NeoPixel LED
+BLUE = (0, 0, 255)  # Color for the NeoPixel LED
 LED_OFF = (0, 0, 0)  # Color to turn off the NeoPixel LED
 
 STATIC_CHOICES = [("a", 2), ("c", 14), ("c", 2), ("d", 2), ("b", 2), ("b", 13)]
 
-def blink_led(blink_pattern):
-    led = neopixel.NeoPixel(Pin(NEOPIXEL_PIN), 1)
-    for i in range(3):
-        for duration in blink_pattern:
-            led[0] = RED  # Set the color of the NeoPixel
-            led.write()
-            utime.sleep(duration)
-            led[0] = LED_OFF  # Set the color of the NeoPixel
-            led.write()  # Turn off the LED
-            utime.sleep(BLINK_SLEEP)  # Sleep for the specified duration
-        utime.sleep(3)
+async def blink_LED(duration, color=RED):
+    if BOARD_TYPE == "XIAO_RP2040":
+        power = Pin(XIAO_POWER_PIN, Pin.OUT)
+        led = WS2812(XIAO_LED_PIN,1)
+        power.value(1)
+        led.pixels_fill(color)  # Set the color of the NeoPixel
+        led.pixels_show()
+        utime.sleep(duration)
+        power.value(0)
+    else:
+        led = neopixel.NeoPixel(Pin(NEOPIXEL_PIN), 1)
+        led[0] = color  # Set the color of the NeoPixel
+        led.write()
+        utime.sleep(duration)
+        led[0] = LED_OFF  # Set the color of the NeoPixel
+        led.write()  # Turn off the LED
 
 # Add this at strategic points in your code where memory might be an issue
 def collect_garbage():
@@ -106,14 +125,14 @@ async def run_sequence(pca, file_name):
         return True
     except OSError as e:
         #print(f"Error opening file {file_name}: {e}")
-        blink_led([SHORT, LONG])
+        blink_led(LONG, RED)
         return False
     except ujson.JSONDecodeError:
-        blink_led([SHORT, SHORT, SHORT])
+        blink_led(LONG, GREEN)
         #print(f"Error parsing JSON in file {file_name}")
         return False
     except Exception as e:
-        blink_led([LONG, SHORT, LONG])
+        blink_led(LONG, BLUE)
         #print(f"Unexpected error: {e}")
         return False
 

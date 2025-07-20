@@ -1,34 +1,53 @@
 import asyncio
+#from platform import machine
 from machine import Pin, I2C
 from micropython_pca9685 import PCA9685
 import ujson
 import uio
 import os
 import neopixel
+from ws2812 import WS2812
 import random
 import utime
+
+BOARD_TYPE = "XIAO_RP2040"  # Options: "RP2040_ZERO" or "XIAO_RP2040"
+
+# Set I2C pins based on board type
+if BOARD_TYPE == "XIAO_RP2040":
+    SDA_PIN = 6  # SDA pin for I2C on Xiao RP2040
+    SCL_PIN = 7  # SCL pin for I2C on Xiao RP2040
+    XIAO_POWER_PIN = 11  # Power pin for Xiao RP2040
+    XIAO_LED_PIN = 12  # RGB LED pin for Xiao RP2040
+else:  # Default to RP2040_ZERO
+    SDA_PIN = 2  # SDA pin for I2C on RP2040 Zero
+    SCL_PIN = 3  # SCL pin for I2C on RP2040 Zero
+    NEOPIXEL_PIN = 16  # Pin connected to the NeoPixel LED
 
 SHORT = 0.125
 LONG = 0.5
 BLINK_SLEEP = 0.25
-NEOPIXEL_PIN = 16  # Pin connected to the NeoPixel LED
 RED = (255, 0, 0)  # Color for the NeoPixel LED
 LED_OFF = (0, 0, 0)  # Color to turn off the NeoPixel LED
 PCA_SWITCH_PIN = 28  # Pin to control the PCA9685 modules
 
 STATIC_CHOICES = [("a", 2), ("c", 14), ("c", 2), ("d", 2), ("b", 2), ("b", 13)]
 
-def blink_led(blink_pattern):
-    led = neopixel.NeoPixel(Pin(NEOPIXEL_PIN), 1)
-    for i in range(3):
-        for duration in blink_pattern:
-            led[0] = RED  # Set the color of the NeoPixel
-            led.write()
-            utime.sleep(duration)
-            led[0] = LED_OFF  # Set the color of the NeoPixel
-            led.write()  # Turn off the LED
-            utime.sleep(BLINK_SLEEP)  # Sleep for the specified duration
-        utime.sleep(3)
+async def blink_LED(duration, color=RED):
+    if BOARD_TYPE == "XIAO_RP2040":
+        power = Pin(XIAO_POWER_PIN, Pin.OUT)
+        led = WS2812(XIAO_LED_PIN,1)
+        power.value(1)
+        led.pixels_fill(color)  # Set the color of the NeoPixel
+        led.pixels_show()
+        utime.sleep(duration)
+        power.value(0)
+    else:
+        led = neopixel.NeoPixel(Pin(NEOPIXEL_PIN), 1)
+        led[0] = color  # Set the color of the NeoPixel
+        led.write()
+        utime.sleep(duration)
+        led[0] = LED_OFF  # Set the color of the NeoPixel
+        led.write()  # Turn off the LED
 
 async def run_sequence(pca, file_name):
     try:
@@ -110,20 +129,12 @@ async def fade(pca, ch, brightness, sleeplen=0.25, fadevalue=0.01):
     #print(f"LED {ch} brightness at {brightness - (int)((i+1)*dimval)}%")
     pca.channels[ch].duty_cycle = percentage_to_duty_cycle(0)
 
-async def flashLED(led, color, duration=0.5):
-    led[0] = color
-    led.write()
-    await asyncio.sleep(duration)
-    led[0] = (0, 0, 0)  # Turn off the LED
-    led.write()
-    await asyncio.sleep(duration)
-
 # Define the main function to run the event loop
 async def main():
     red = (255, 0, 0)
     green = (0, 255, 0)
     blue = (0, 0, 255)
-    led = neopixel.NeoPixel(machine.Pin(16), 1)  # Using internal NeoPixel on Pin 16
+    led = neopixel.NeoPixel(Pin(16), 1)  # Using internal NeoPixel on Pin 16
 
     slow = [1, 1]
     walk = [0.5, 0.25]
@@ -135,34 +146,33 @@ async def main():
     pcaswitch = Pin(PCA_SWITCH_PIN, Pin.OUT)
     pcaswitch.off()  # PNP, turn on the PCA9685 modules
     await asyncio.sleep(1)  # Wait for the PCA9685 modules to initialize
-    
-    i2c = I2C(1, sda=Pin(2), scl=Pin(3))  # Correct I2C pins for RP2040
+
+    i2c = I2C(1, sda=Pin(SDA_PIN), scl=Pin(SCL_PIN))  # Correct I2C pins for RP2040
     pca_A = PCA9685(i2c, address=0x40)
     pca_B = PCA9685(i2c, address=0x41)
     pca_C = PCA9685(i2c, address=0x42)
     pca_D = PCA9685(i2c, address=0x43)
 
     #pca_A.frequency = pca_B.frequency = pca_C.frequency = 512
-    pca_A.frequency = pca_B.frequency = pca_C.frequency = pca_D.frequency = 512
+    pca_A.frequency = pca_B.frequency = pca_C.frequency = pca_D.frequency = 2047
 
     #pca = [pca_A, pca_B, pca_C]
     pca = [pca_A, pca_B, pca_C, pca_D] 
     module = ['a', 'b', 'c', 'd']
     
-    if False:
+    while True:
         dir = "sequences/"
         files = os.listdir(dir)
         #filenum = 1 # Change this to the desired sequence file number
         #print(f"Running sequence from file: {files[filenum]}")
         #await run_sequence(pca, files[filenum]) # Run the sequence from the JSON file
         for f in files:
-            await flashLED(led, green, 0.5)  # Flash the LED green to indicate start
+            await blink_LED(LONG, green)  # Flash the LED green to indicate start
             print(f"Running sequence from file: {f}")
             await run_sequence(pca, f) # Run the sequence from the JSON file
-            await flashLED(led, red, 0.5)  # Flash the LED green to indicate stop
             await asyncio.sleep(1)
 
-    if True: # Set to True to Test all LEDs on all modules
+    if False: # Set to True to Test all LEDs on all modules
         for i in range(len(pca)):
             for j in range(16):
                 print(f"mod:{module[i]},{j}")
