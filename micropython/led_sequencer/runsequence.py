@@ -21,7 +21,7 @@ PCA_SWITCH_PIN = 28  # Pin to control the PCA9685 modules
 # PCA_SWITCH_PIN = 27  # Pin to control the PCA9685 modules
 
 # Board configuration - Change this to match your microcontroller
-BOARD_TYPE = "RP2040_ZERO"  # Options: "RP2040_ZERO" or "XIAO_RP2040"
+BOARD_TYPE = "XIAO_RP2040"  # Options: "RP2040_ZERO" or "XIAO_RP2040"
 
 # Set I2C pins based on board type
 if BOARD_TYPE == "XIAO_RP2040":
