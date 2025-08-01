@@ -129,6 +129,13 @@ async def fade(pca, ch, brightness, sleeplen=0.25, fadevalue=0.01):
     #print(f"LED {ch} brightness at {brightness - (int)((i+1)*dimval)}%")
     pca.channels[ch].duty_cycle = percentage_to_duty_cycle(0)
 
+async def run_static_sequences_continuously(pca, stop_event):
+    static_files = ["static_longthrob_sequence.json", "static_shortthrob_sequence.json"]
+    while not stop_event.is_set():
+        for file_name in static_files:
+            await run_sequence(pca, file_name)
+            await asyncio.sleep(0)  # Yield to event loop
+
 # Define the main function to run the event loop
 async def main():
     red = (255, 0, 0)
@@ -163,14 +170,22 @@ async def main():
     while True:
         dir = "sequences/"
         files = os.listdir(dir)
-        #filenum = 1 # Change this to the desired sequence file number
-        #print(f"Running sequence from file: {files[filenum]}")
-        #await run_sequence(pca, files[filenum]) # Run the sequence from the JSON file
-        for f in files:
-            await blink_LED(LONG, green)  # Flash the LED green to indicate start
-            print(f"Running sequence from file: {f}")
-            await run_sequence(pca, f) # Run the sequence from the JSON file
-            await asyncio.sleep(1)
+        # Remove static files from the list to avoid double-running
+        static_files = {"static_longthrob_sequence.json", "static_shortthrob_sequence.json"}
+        sequence_files = [f for f in files if f not in static_files]
+
+        stop_event = asyncio.Event()
+        static_task = asyncio.create_task(run_static_sequences_continuously(pca, stop_event))
+
+        try:
+            for f in sequence_files:
+                await blink_LED(LONG, green)  # Flash the LED green to indicate start
+                print(f"Running sequence from file: {f}")
+                await run_sequence(pca, f) # Run the sequence from the JSON file
+                await asyncio.sleep(1)
+        finally:
+            stop_event.set()
+            await static_task  # Wait for static task to finish
 
     if False: # Set to True to Test all LEDs on all modules
         for i in range(len(pca)):

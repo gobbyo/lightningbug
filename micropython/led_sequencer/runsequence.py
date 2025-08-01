@@ -10,9 +10,9 @@ import uio
 import utime
 import gc
 
-MINIMUM_SEQUENCE_RUN = 1  # Minimum number of sequences to run
-MIN_SLEEP_TIME_BETWEEN_RUNS = 1  # Minimum sleep time in seconds
-MAX_SLEEP_TIME_BETWEEN_RUNS = 5  # Maximum sleep time in seconds
+MINIMUM_SEQUENCE_RUN = 3  # Minimum number of sequences to run
+MIN_SLEEP_TIME_BETWEEN_RUNS = 0  # Minimum sleep time in seconds
+MAX_SLEEP_TIME_BETWEEN_RUNS = 3  # Maximum sleep time in seconds
 LIGHT_DETECTION_SLEEP = 30  # Sleep time in seconds for light detection
 PWM_FREQUENCY = 2047  # PWM frequency for PCA9685
 PHOTORESISTOR_PIN = 29  # Pin for the photoresistor
@@ -194,7 +194,13 @@ async def main(light, pcaswitch, files):
         
         try:
             pca = await setup_pca_modules(i2c)
-            await run_sequences(pca, files)
+            stop_event = asyncio.Event()
+            static_task = asyncio.create_task(run_static_sequences_continuously(pca, stop_event))
+            try:
+                await run_sequences(pca, files)
+            finally:
+                stop_event.set()
+                await static_task
         finally:
             # Ensure we turn off the modules even if an error occurs
             pcaswitch.on()  # PNP, turn off the PCA9685 modules
@@ -222,6 +228,13 @@ async def run_sequences(pca, files):
         for pca_instance in pca:
             for channel in pca_instance.channels:
                 channel.duty_cycle = 0
+
+async def run_static_sequences_continuously(pca, stop_event):
+    static_files = ["static_longthrob_sequence.json", "static_shortthrob_sequence.json"]
+    while not stop_event.is_set():
+        for file_name in static_files:
+            await run_sequence(pca, file_name)
+            await asyncio.sleep(0)  # Yield to event loop
     
 if __name__ == "__main__":
     try:
